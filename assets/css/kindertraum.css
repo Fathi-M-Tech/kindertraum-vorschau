@@ -1,0 +1,1851 @@
+/* ==========================================================================
+   Kindertraum – Overrides für die Yamakita-Vorlage (Variante 3)
+
+   base.css und page_home.css bleiben unverändert (Layout, Grid, Abstände,
+   Breakpoints). Diese Datei enthält AUSSCHLIESSLICH:
+     1. Farbwelt + Schriften
+     2. Header / Overlay-Menü (Text statt Bild, Wolken statt PNG)
+     3. Loader
+     4. Hero (Textblock, Wolken statt Hügel, Ballon statt Zug)
+     5. Über uns / Botschaft
+     6. Aktuelles
+     7. Menü-Kacheln
+     8. Footer
+     9. Buttons, Scroll-Reveal, Animationen, Reduced Motion
+   Alle Selektoren entsprechen den Vorlagen-Namespaces (#Gh, #kv, #message,
+   #news, #homeMenu, #Gf) – jede Sektion bleibt ein eigenständiger Block.
+   ========================================================================== */
+
+/* ---------- 1. Farbwelt + Schriften ---------- */
+
+:root {
+	--kt-sky: #8FD1EC;
+	--kt-sky-deep: #5FB8DD;
+	--kt-cream: #FAF0D6;
+	--kt-sun: #FFD977;
+	--kt-sky-night: #26789F;  /* Footer: Weiß darauf ≥ 4,5:1 */
+	--kt-ink: #3A4A55;
+	--kt-ink-soft: #5f7280;
+	--kt-link: #23739A;        /* Textlinks: ≥ 4,5:1 auf Creme */
+	--kt-white: #ffffff;
+
+	/* Vorlagen-Variablen umbelegen (werden von base.css/page_home.css benutzt) */
+	--color-link: var(--kt-sun);          /* Button-Hintergrund (.more__anchor) */
+	--color-main: var(--kt-ink);
+	--color-ttl: var(--kt-ink);
+	--color-txt: var(--kt-ink);
+	--color-weak: var(--kt-ink-soft);
+	--color-hover: var(--kt-sky-deep);
+	--color-accent: var(--kt-sky-deep);
+	--color-accent1: var(--kt-sun);
+	--color-accent2: var(--kt-sky-deep);
+	--color-accent-bg: var(--kt-sky);
+	--color-bg: var(--kt-white);
+
+	--sansserif: 'Nunito', 'Segoe UI', Arial, sans-serif;
+	--sansserif-en: 'Baloo 2', 'Nunito', 'Segoe UI', Arial, sans-serif;
+
+	/* Runde Ausschnitte (Karten-Ecken) in der neuen Creme-Farbe – gleiche Pfade wie in der Vorlage */
+	--round-out-corner-LT: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Cpath fill='%23FAF0D6' d='M40,0H0v40C0,17.9,17.9,0,40,0z'/%3E%3C/svg%3E");
+	--round-out-corner-LB: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Cpath fill='%23FAF0D6' d='M40,40H0V0C0,22.1,17.9,40,40,40z'/%3E%3C/svg%3E");
+	--round-out-corner-RB: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Cpath fill='%23FAF0D6' d='M0,40h40V0C40,22.1,22.1,40,0,40z'/%3E%3C/svg%3E");
+}
+
+body {
+	color: var(--kt-ink);
+	background-color: var(--kt-cream);
+}
+
+a:hover {
+	color: var(--kt-link);
+}
+
+::selection {
+	background: var(--kt-sun);
+	color: var(--kt-ink);
+}
+
+/* ---------- 2. Header / Overlay-Menü (#Gh) ---------- */
+
+.Gh--inner::after {
+	background-image: url(../img/clouds/cloud-menu-bg.svg);
+}
+
+.Gh .overlay_bk {
+	background-color: rgba(143, 209, 236, 0.6);
+}
+
+.Gh .menu__button {
+	background-image: url(../img/clouds/cloud-menu-button.svg);
+	filter: drop-shadow(0 6px 14px rgba(58, 74, 85, 0.12));
+}
+
+/* Menü-Wolke etwas kleiner als in der Vorlage (110/185 px) – Wunsch Fathi */
+.Gh .menu__button {
+	width: 96px;
+	height: 96px;
+}
+
+@media screen and (min-width: 1280px) {
+	.Gh .menu__button {
+		width: 158px;
+		height: 158px;
+	}
+}
+
+.Gh .menu__button a {
+	font-family: var(--sansserif-en);
+	letter-spacing: 0.04em;
+}
+
+.Gh .menu__button:hover {
+	transform: scale3d(1.03, 1.03, 1.03);
+}
+
+.g-nav .symbol img {
+	width: 100%;
+	height: auto;
+}
+
+/* Navigation: Text an Stelle der Bildgrafiken (gleiche Zeilenhöhe wie die 20/28px-Bilder) */
+.g-nav__list.main {
+	font-family: var(--sansserif-en);
+	color: var(--kt-ink);
+}
+
+.g-nav__list.main .g-nav__anchor .lbl {
+	display: inline-block;
+	line-height: 1.2;
+	transition: color 0.3s ease;
+}
+
+.g-nav__list.main .g-nav__anchor:hover .lbl {
+	color: var(--kt-sky-deep);
+}
+
+.g-nav__list.main .g-nav__li .local__anchor {
+	font-family: var(--sansserif);
+	font-size: 1.3rem;
+	font-weight: 600;
+	color: var(--kt-link);
+}
+
+.g-nav__list.sub {
+	font-family: var(--sansserif);
+	font-weight: 600;
+	color: var(--kt-ink-soft);
+}
+
+.g-nav__list.sub .g-nav__anchor:hover {
+	color: var(--kt-sky-deep);
+}
+
+@media screen and (min-width: 1280px) {
+	.g-nav__list.main .g-nav__anchor .lbl {
+		line-height: 1;
+	}
+}
+
+/* ---------- 3. Loader ---------- */
+
+.loader-outer {
+	background: var(--kt-cream);
+}
+
+.loader .mark {
+	width: 120px;
+}
+
+.loader .mark .loader__logo {
+	width: 100%;
+	height: auto;
+	animation: kt-breathe 1.6s ease-in-out infinite;
+}
+
+@media screen and (min-width: 1280px) {
+	.loader .mark {
+		width: 170px;
+	}
+}
+
+/* ---------- 4. Hero (#kv) ---------- */
+
+.kv {
+	background-color: var(--kt-sky);
+}
+
+/* Kein Farbfilm über den Hero-Fotos (Wunsch Fathi): das Overlay der Vorlage wird abgeschaltet,
+   die Bilder erscheinen unbearbeitet. */
+.kv__img:before,
+.kv.-start .kv__img:before {
+	display: none;
+}
+
+/* Hero-Text und Seitentext entfernt (Wunsch Fathi, 15.09.2026): nur Logo im Hero. */
+.kvTxt,
+.kv-enTxt {
+	display: none;
+}
+
+/* Wolken statt Hügel – Slots/Maße bleiben, nur Grafik + ruhige Bewegung */
+/* Nebelband unter den Wolken: beginnt oberhalb der Hero-Unterkante (100vh), deckt die Fotokante
+   in jeder Breite ab – auch in Lücken zwischen den Wolken – und läuft unterhalb der Wolkenbasis
+   (130vh) weich in die Creme-Sektion aus. Liegt unter den Wolken (::after ohne z-index). */
+.mountain:after {
+	height: calc(42vh + 80px);
+	bottom: -80px;
+	background: linear-gradient(to bottom,
+		rgba(248, 251, 253, 0) 0%,
+		rgba(248, 251, 253, 0.97) 26%,
+		rgba(248, 251, 253, 0.97) 62%,
+		rgba(248, 251, 253, 0) 100%);
+}
+
+.mountain-behind img {
+	animation: kt-cloud-drift 8s ease-in-out infinite;
+}
+
+/* Hero-Wolken leicht transparent: als Gruppen-Opacity in den SVGs (gen_assets.py, HERO_ALPHA), nicht per CSS –
+   sonst würden sich die überlappenden Bilder als Streifen abzeichnen. */
+/* Vordere Wolkenbank: links, Mitte und rechts driften gemeinsam (eine Bewegung = eine Wolke) */
+.mountain--frontLeft img,
+.mountain--frontRight img,
+.mountain--frontBlock .mountain-frontImg img {
+	animation: kt-cloud-drift 9s ease-in-out infinite;
+	animation-delay: -3s;
+}
+
+/* Aufteilung wie bei Yamakita: seitliche Kuppen beginnen bei ≈ 46 % der Hero-Höhe, die Talwolke bei ≈ 64 %. Formen unverändert – nur die Bildhöhe (Breite skaliert mit). */
+@media screen and (min-width: 768px) {
+	.mountain--frontLeft img,
+	.mountain--frontRight img,
+	.mountain--frontBlock img {
+		height: 670px;
+	}
+	.mountain .mountain-behind img {
+		height: 580px;
+	}
+}
+
+@media screen and (min-width: 1280px) {
+	.mountain--frontLeft img,
+	.mountain--frontRight img,
+	.mountain--frontBlock img {
+		height: 710px;
+	}
+	.mountain .mountain-behind img {
+		height: 765px;
+	}
+}
+
+/* Logo + Name unten links im Wolkenfeld (statt zentriert über der mittleren Wolke) */
+.mountain--frontBlock .kvLogo {
+	z-index: 2;
+	left: 20px;
+	right: auto;
+	bottom: calc(30vh - 70px); /* Block-Unterkante liegt bei 130vh → sichtbar am unteren Hero-Rand */
+	width: auto;
+	max-width: none;
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	pointer-events: auto;
+	animation: kt-float 5.5s ease-in-out infinite;
+	filter: drop-shadow(0 8px 18px rgba(58, 74, 85, 0.12));
+}
+
+.mountain--frontBlock .kvLogo img {
+	width: 72px;
+	height: auto;
+	flex: 0 0 auto;
+}
+
+.kvLogo__txt {
+	display: flex;
+	flex-direction: column;
+	color: var(--kt-ink);
+	line-height: 1.2;
+}
+
+.kvLogo__welcome,
+.kvLogo__name {
+	font-family: var(--sansserif-en);
+	font-weight: 700;
+	font-size: 1.8rem;
+}
+
+.kvLogo__welcome {
+	margin-bottom: 0.1em;
+}
+
+.kvLogo__sub {
+	margin-top: 0.25em;
+	font-family: var(--sansserif);
+	font-weight: 600;
+	font-size: 1.2rem;
+	letter-spacing: 0.06em;
+	color: var(--kt-ink-soft);
+}
+
+@media screen and (min-width: 768px) {
+	.mountain--frontBlock .kvLogo {
+		left: 40px;
+		bottom: calc(30vh - 50px);
+		gap: 18px;
+	}
+	.mountain--frontBlock .kvLogo img { width: 110px; }
+	.kvLogo__welcome,
+	.kvLogo__name { font-size: 2.6rem; }
+	.kvLogo__sub { font-size: 1.4rem; }
+}
+
+@media screen and (min-width: 1280px) {
+	.mountain--frontBlock .kvLogo {
+		left: 60px;
+		bottom: calc(30vh - 40px);
+		gap: 22px;
+	}
+	.mountain--frontBlock .kvLogo img { width: 140px; }
+	.kvLogo__welcome,
+	.kvLogo__name { font-size: 3.2rem; }
+	.kvLogo__sub { font-size: 1.6rem; }
+}
+
+/* Shinkansen-Slot bleibt im DOM, wird nicht mehr genutzt (Ballon entfernt, 15.09.2026) */
+.shinkansenWrap {
+	display: none;
+}
+
+/* Schwalben im Vorlagen-Slot .birds: einfarbige, leicht transparente Silhouetten (3 vorne,
+   2 weit hinten), gleiten von links außerhalb nach rechts außerhalb auf sanft geschwungener
+   Bahn. Nur transform/opacity animiert. */
+.birds {
+	width: auto;
+	left: 0;
+	right: auto;
+	top: auto;
+	bottom: calc(100% + 112vh - 210px); /* Wrap-Oberkante liegt bei 130vh − Wolkenhöhe → Vögel bei ~18vh */
+	transform: none;
+	pointer-events: none;
+}
+
+.sw {
+	--sw-lift: 14px;
+	--sw-beat: 4.6s;
+	--sw-phase: -1.2s;
+	position: absolute;
+	left: 0;
+	display: block;
+	width: 64px;
+	opacity: 0;
+	animation: kt-sw-fly 22s linear infinite;
+	will-change: transform, opacity;
+}
+
+.sw__path {
+	display: block;
+	animation: kt-sw-curve 13s ease-in-out infinite;
+	will-change: transform;
+}
+
+.sw__svg {
+	display: block;
+	width: 100%;
+	height: auto;
+	overflow: visible;
+	transform: rotate(-6deg); /* nur leicht aufsteigend, sonst wirkt es wie ein Flugzeug */
+	opacity: 0.96;
+}
+
+/* Schwalben im Stil der Kinderfiguren: flache, runde Formen, keine Kontur, kein Filter */
+.sw-defs {
+	position: absolute;
+	width: 0;
+	height: 0;
+	overflow: hidden;
+}
+
+.sw__fill {
+	fill: #427D9D;
+}
+
+.sw__wing-light { fill: #79B4CE; }
+.sw__eye-ring { fill: #FFF8E9; }
+.sw__feather {
+	fill: none;
+	stroke: #A4D0E0;
+	stroke-width: 2;
+	stroke-linecap: round;
+	opacity: 0.65;
+}
+
+.sw__wing--low .sw__fill { fill: #6499B5; }
+
+.sw__throat {
+	fill: #E8A18D;
+}
+
+.sw__belly {
+	fill: #FFF3D6; /* Creme wie die Kinderkleidung */
+}
+
+.sw__beak {
+	fill: #365B73;
+}
+
+.sw__eye {
+	fill: var(--kt-ink);
+}
+
+.sw__eye-light {
+	fill: var(--kt-white);
+}
+
+/* dezenter Flügelschlag: oberer und unterer Flügel gegenläufig um die Schulter */
+.sw__wing {
+	transform-box: view-box;
+	transform-origin: 116px 94px;
+	animation: kt-sw-flap var(--sw-beat) ease-in-out infinite;
+	animation-delay: var(--sw-phase);
+}
+
+.sw__wing--low {
+	transform-origin: 114px 102px;
+	animation-name: kt-sw-flap-low;
+}
+
+.sw-1 { top: -4vh; width: 68px; animation-duration: 44s; animation-delay: -12s; }
+.sw-1 .sw__path { animation-duration: 13s; }
+.sw-2 { top: 6vh;  width: 52px; animation-duration: 52s; animation-delay: -30s; }
+.sw-2 { --sw-beat: 5.2s; --sw-phase: -3.4s; --sw-lift: 18px; }
+.sw-2 .sw__path { animation-duration: 17s; animation-delay: -3s; }
+.sw-3 { top: -10vh; width: 44px; animation-duration: 38s; animation-delay: -20s; }
+.sw-3 { --sw-beat: 4.1s; --sw-phase: -2.6s; --sw-lift: 11px; }
+.sw-3 .sw__path { animation-duration: 12s; animation-delay: -1.5s; }
+
+/* entfernte Gruppe: ~35 % Größe, 20 % Opazität, noch langsamer */
+.sw-far { width: 24px; }
+.sw-far .sw__svg { opacity: 0.55; }
+.sw-4 { top: 2vh;  animation-duration: 64s; animation-delay: -40s; }
+.sw-4 { --sw-beat: 5.8s; --sw-phase: -4.2s; --sw-lift: 8px; }
+.sw-4 .sw__path { animation-duration: 19s; animation-delay: -4s; }
+.sw-5 { top: -2vh; width: 20px; animation-duration: 76s; animation-delay: -15s; }
+.sw-5 { --sw-beat: 6.3s; --sw-phase: -1.8s; --sw-lift: 10px; }
+.sw-5 .sw__path { animation-duration: 21s; animation-delay: -6s; }
+
+@media screen and (min-width: 540px) {
+	.birds { bottom: calc(100% + 114vh - 220px); }
+}
+
+@media screen and (min-width: 768px) {
+	.birds { bottom: calc(100% + 114vh - 830px); }
+	.sw-1 { width: 96px; }
+	.sw-2 { width: 74px; }
+	.sw-3 { width: 60px; }
+	.sw-far { width: 34px; }
+	.sw-5 { width: 28px; }
+}
+
+@keyframes kt-sw-fly {
+	0%   { transform: translate3d(-18vw, 0, 0); opacity: 0; }
+	6%   { opacity: 1; }
+	94%  { opacity: 1; }
+	100% { transform: translate3d(118vw, -6vh, 0); opacity: 0; }
+}
+
+@keyframes kt-sw-curve {
+	0%, 100% { transform: translate3d(0, 0, 0) rotate(1deg); }
+	32% { transform: translate3d(0, calc(-1 * var(--sw-lift)), 0) rotate(-4deg); }
+	65% { transform: translate3d(0, calc(-0.45 * var(--sw-lift)), 0) rotate(2deg); }
+	84% { transform: translate3d(0, calc(0.2 * var(--sw-lift)), 0) rotate(1deg); }
+}
+
+/* Drei kurze Fluegelschlaege, danach eine lange Gleitphase.
+   Individuelle Dauer/Phase verhindert synchrones mechanisches Flattern. */
+@keyframes kt-sw-flap {
+	4%, 20%, 36% { transform: rotate(-12deg) scaleY(1); }
+	12%, 28%, 44% { transform: rotate(19deg) scaleY(0.72); }
+	0%, 54%, 100% { transform: rotate(-5deg) scaleY(0.94); }
+}
+
+@keyframes kt-sw-flap-low {
+	4%, 20%, 36% { transform: rotate(10deg) scaleY(1); }
+	12%, 28%, 44% { transform: rotate(-16deg) scaleY(0.76); }
+	0%, 54%, 100% { transform: rotate(4deg) scaleY(0.94); }
+}
+
+/* ---------- 5. Über uns / Botschaft (#message) ---------- */
+
+/* Seitenwolken laufen zusammen mit der Bodenwolke weich in die Creme aus. */
+.message {
+	-webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 calc(100% - 140px), transparent 100%);
+	mask-image: linear-gradient(to bottom, #000 0%, #000 calc(100% - 140px), transparent 100%);
+}
+
+/* Seitenwolken entfernt – nur die Bodenwolke bleibt als Übergang zur nächsten Sektion */
+.message:before,
+.message:after {
+	display: none;
+}
+
+/* Mobil/Tablet: Überschrift erst unterhalb des Nebelbands beginnen lassen, sonst liegt der weiße
+   Schimmer über „Gemeinsam wachsen“. Herleitung: .mountain (130vh) ist im Hero (90–100vh) zentriert,
+   das Nebelband endet 80px unter der Wolkenbasis → Überschrift ≥ 115vh + 80px (bei Hero = 100vh). */
+@media screen and (max-width: 1279px) {
+	.message {
+		padding-top: calc(20vh + 110px);
+	}
+}
+
+/* Bodenwolke: leicht breiter skaliert, damit beim Driften keine Lücke am Rand entsteht */
+.ms_frame-bottom {
+	transform-origin: center bottom;
+	animation: kt-frame-bottom 10s ease-in-out infinite;
+	animation-delay: -2s;
+}
+
+@media screen and (min-width: 768px) {
+	.ms_frame-bottom {
+		animation-name: kt-frame-bottom-pc;
+	}
+}
+
+@keyframes kt-frame-bottom {
+	0%   { transform: translate3d(-14px, 0, 0) scale(1.14); }
+	50%  { transform: translate3d(14px, -6px, 0) scale(1.14); }
+	100% { transform: translate3d(-14px, 0, 0) scale(1.14); }
+}
+
+@keyframes kt-frame-bottom-pc {
+	0%   { transform: translate3d(-14px, 0, 0) scale(1.03); }
+	50%  { transform: translate3d(14px, -6px, 0) scale(1.03); }
+	100% { transform: translate3d(-14px, 0, 0) scale(1.03); }
+}
+
+.msgContents .msgImg {
+	margin-top: 0;
+}
+
+/* Mobil: Überschrift linksbündig auf gleicher Kante wie der Text */
+.msgContents .msgImg {
+	width: 100%;
+	max-width: none;
+	margin: 0 0 2rem;
+}
+
+.msgImg__ttl {
+	margin: 0;
+	font-family: var(--sansserif-en);
+	font-weight: 700;
+	font-size: 3.2rem;
+	line-height: 1.2;
+	color: var(--kt-ink);
+	text-align: left;
+}
+
+.msgImg__line {
+	display: block;
+}
+
+.msgImg__line.-accent {
+	display: inline-block;
+	margin-top: 0.25em;
+	padding: 0.05em 0.5em;
+	border-radius: 100px;
+	background: var(--kt-sun);
+	color: var(--kt-ink);
+	font-size: 0.7em;
+	letter-spacing: 0.06em;
+}
+
+/* Textspalte: ruhiger Lesetext statt Plakat-Look */
+.msgContents {
+	width: 88%;
+}
+
+.msgContents .megTxtWrap {
+	width: 100%;
+	max-width: 62rem;
+	margin: 0 auto;
+}
+
+.msgContents .msgTxt {
+	color: var(--kt-ink);
+	font-size: 1.5rem;
+	font-weight: 500;
+	line-height: 1.85;
+	margin: 0 0 1.2em;
+	text-align: left;
+}
+
+.msgContents .msgTxt--lead {
+	font-size: 1.7rem;
+	font-weight: 600;
+	line-height: 1.7;
+	margin-bottom: 1.4em;
+}
+
+.msgContents .msgTxt__link {
+	color: var(--kt-link);
+	font-weight: 700;
+	text-decoration: underline;
+	text-decoration-thickness: 2px;
+	text-underline-offset: 3px;
+}
+
+.msgSub {
+	position: relative;
+	margin: 2em 0 0.8em;
+	padding-left: 1.8rem;
+	font-family: var(--sansserif-en);
+	font-weight: 700;
+	font-size: 2rem;
+	line-height: 1.3;
+	color: var(--kt-ink);
+}
+
+.msgSub:before {
+	content: "";
+	position: absolute;
+	left: 0;
+	top: 0.35em;
+	width: 1rem;
+	height: 1rem;
+	border-radius: 50%;
+	background: var(--kt-sun);
+}
+
+.msgQuote {
+	margin: 2.4em 0 0;
+	padding: 1.4em 1.8em;
+	border-left: 4px solid var(--kt-sun);
+	background: rgba(255, 255, 255, 0.55);
+	border-radius: 0 20px 20px 0;
+	color: var(--kt-ink);
+}
+
+.msgQuote strong {
+	display: block;
+	font-family: var(--sansserif-en);
+	font-size: 2rem;
+	line-height: 1.3;
+	color: var(--kt-sky-night);
+}
+
+.msgQuote__sub {
+	display: block;
+	margin-top: 0.3em;
+	font-size: 1.4rem;
+	font-weight: 500;
+}
+
+@media screen and (min-width: 768px) {
+	.msgContents {
+		align-items: flex-start;
+		flex-wrap: nowrap;
+		justify-content: space-between;
+		width: 80%;
+		max-width: 110rem;
+	}
+
+	.msgContents .msgImg {
+		flex: 0 0 34%;
+		width: 34%;
+		max-width: none;
+		margin: 0;
+		position: sticky;
+		top: 12rem;
+	}
+
+	.msgImg__ttl {
+		font-size: 3.8rem;
+		text-align: left;
+	}
+
+	.msgContents .megTxtWrap {
+		flex: 0 0 58%;
+		width: 58%;
+		max-width: none;
+		min-width: 0;
+		margin: 0;
+	}
+}
+
+@media screen and (min-width: 1280px) {
+	.msgContents {
+		width: 76%;
+	}
+
+	.msgContents .msgImg {
+		flex-basis: 36%;
+		width: 36%;
+	}
+
+	.msgImg__ttl {
+		font-size: 4.6rem;
+	}
+
+	.msgContents .megTxtWrap {
+		flex-basis: 56%;
+		width: 56%;
+	}
+
+	.msgContents .msgTxt {
+		font-size: 1.6rem;
+		line-height: 1.9;
+	}
+
+	.msgContents .msgTxt--lead {
+		font-size: 1.9rem;
+		line-height: 1.65;
+	}
+}
+
+/* ---------- 6. Aktuelles (#news) ---------- */
+
+.news .contents__ttl {
+	font-family: var(--sansserif-en);
+	font-weight: 700;
+	font-size: 2.4rem;
+	line-height: 1;
+	color: var(--kt-ink);
+}
+
+.news .contents__ttl .contents__ttl-txt {
+	display: block;
+	line-height: 25px; /* Höhe der Titelgrafik in der Vorlage */
+}
+
+.newsList__item .article__anchor .article__info .article__meta-date,
+.newsList__item .article__anchor .article__info .article__meta-cat {
+	color: var(--kt-ink-soft);
+}
+
+.newsList__item .article__anchor .article__info .article__ttl {
+	color: var(--kt-ink);
+	text-decoration-color: var(--kt-sky-deep);
+	text-underline-offset: 3px;
+}
+
+.newsList__item .article__anchor:hover .article__ttl {
+	color: var(--kt-link);
+}
+
+.newsList__item .article__anchor:hover .article__img img {
+	transform: scale(1.03);
+}
+
+@media screen and (min-width: 1280px) {
+	.news .contents__ttl {
+		font-size: 3rem;
+	}
+}
+
+/* ---------- 7. Menü-Kacheln (#homeMenu) ---------- */
+
+/* Vertikale Titel wie die Bildgrafiken der Vorlage (18/25px breit) */
+.homeMenu .contents__ttl .contents__ttl-txt {
+	display: block;
+	writing-mode: vertical-rl;
+	text-orientation: mixed;
+	font-family: var(--sansserif-en);
+	font-weight: 700;
+	font-size: 1.8rem;
+	line-height: 1;
+	letter-spacing: 0.06em;
+	color: var(--kt-ink);
+	white-space: nowrap;
+}
+
+.homeMenu .menu__txt {
+	color: var(--kt-ink);
+}
+
+.menuBlock.menu--access .accessContents {
+	background-color: var(--kt-white);
+	box-shadow: 0 10px 30px rgba(58, 74, 85, 0.06);
+}
+
+.menuBlock.menu--access .address__txt {
+	color: var(--kt-ink);
+}
+
+.menuBlock .map__anchor {
+	color: var(--kt-link);
+	text-decoration: underline;
+}
+
+.menuBlock .map__anchor:hover {
+	color: var(--kt-sky-deep);
+}
+
+.menuBlock.menu--access .telNum {
+	color: var(--kt-ink);
+}
+
+.menuBlock.menu--access .telWrap {
+	margin-bottom: 1.2em;
+}
+
+.homeMenu__anchor:hover .menuFigure img,
+.menuFigure:hover img {
+	transform: scale(1.03);
+}
+
+@media screen and (min-width: 1280px) {
+	.homeMenu .contents__ttl .contents__ttl-txt {
+		font-size: 2.2rem;
+	}
+}
+
+/* ---------- 8. Footer (#Gf) ---------- */
+/* Layout: 4-spaltiges Grid (Kontakt · Seiten · Rechtliches · Folgen Sie uns) statt der
+   Flex-Blöcke der Vorlage. Farben/Typografie unverändert – nur Anordnung und Größen. */
+
+.Gf {
+	background-color: var(--kt-sky-deep); /* Wunsch Fathi: gleiches Blau wie Menü-Button/-Linien */
+	color: var(--kt-white);
+}
+
+.Gf .ftr-illust img {
+	display: block;
+	width: 100%;
+	height: auto;
+}
+
+.Gf__other {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 36px 32px;
+	align-items: start;
+	margin-top: 24px;
+	margin-bottom: 56px;
+}
+
+.Gf__layoutblock,
+.Gf__layoutblock + .Gf__layoutblock {
+	width: auto;
+	margin: 0;
+}
+
+/* Spalte 1: Logo + Adresse als Einheit */
+.Gf__identity {
+	display: flex;
+	align-items: center;
+	gap: 16px;
+}
+
+.Gf-logo {
+	flex: 0 0 auto;
+	width: auto;
+	max-width: none;
+	line-height: 0;
+}
+
+.Gf-logo img {
+	display: block;
+	width: 64px;
+	height: auto;
+}
+
+.Gf__identity .Gf__address-tbl {
+	flex: 1 1 auto;
+	min-width: 0;
+}
+
+.Gf__identity .Gf__address-tbl__des {
+	width: auto;
+	margin: 0;
+}
+
+.Gf__address-tbl,
+.Gf__address-tbl .tel__data,
+.Gf__nav__list {
+	color: var(--kt-white);
+}
+
+.Gf__hours {
+	margin: 0;
+	font-size: 1.3rem; /* wie .Gf__nav__anchor */
+	font-weight: 600;
+	color: rgba(255, 255, 255, 0.9);
+}
+
+
+/* Google-Maps-Karte: dezent, direkt unter dem Kontaktblock, wie eine Kachel der übrigen Elemente */
+.Gf__map {
+	padding-top: 16px;
+}
+
+.Gf__map-frame {
+	display: block;
+	width: 100%;
+	height: 150px;
+	border: 1px solid rgba(255, 255, 255, 0.35);
+	border-radius: 16px;
+	background: rgba(255, 255, 255, 0.25);
+	box-shadow: none;
+}
+
+/* Spaltentitel (Klasse aus base.css, dort grau) */
+.Gf__section-ttl {
+	margin: 0 0 8px;
+	font-family: var(--sansserif-en); /* wie bisher „Folgen Sie uns“ */
+	font-weight: 600;
+	letter-spacing: .085rem;
+	color: rgba(255, 255, 255, 0.7);
+}
+
+.Gf__section-ttl--follow {
+	margin-top: 24px;
+}
+
+.Gf__nav__list {
+	margin-right: 0;
+}
+
+.Gf__nav__item .Gf__nav__anchor {
+	overflow-wrap: anywhere; /* E-Mail-Adresse darf in schmalen Spalten umbrechen (<wbr> nach @) */
+}
+
+.Gf__social {
+	display: flex;
+	justify-content: flex-start;
+	gap: 12px;
+}
+
+.Gf__social-anchor {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 44px;
+	height: 44px;
+	border-radius: 100px;
+	background: rgba(255, 255, 255, 0.18);
+	color: var(--kt-white);
+	transition: transform 0.4s ease, background-color 0.4s ease;
+}
+
+.Gf__social-anchor .icon {
+	width: 24px;
+	height: 24px;
+	display: inline-block;
+}
+
+.Gf__social-anchor .icon svg {
+	width: 24px;
+	height: 24px;
+	display: block;
+	fill: currentColor;
+}
+
+.Gf__social-anchor:hover {
+	background: var(--kt-white);
+	color: var(--kt-sky-night);
+	transform: scale(1.03);
+}
+
+
+@media screen and (min-width: 768px) {
+	.Gf__other {
+		grid-template-columns: 1fr 1fr;
+		gap: 40px 48px;
+		margin-bottom: 56px;
+	}
+
+	.Gf-logo img {
+		width: 72px;
+	}
+
+	.Gf__map {
+		max-width: 420px;
+	}
+}
+
+@media screen and (min-width: 1280px) {
+	/* Spalten inhaltsbreit, freier Raum gleichmäßig zwischen den Spalten verteilt →
+	   gleiche Abstände zwischen allen Rubriken, unabhängig von der Viewport-Breite */
+	.Gf__other {
+		grid-template-columns: minmax(360px, auto) auto auto auto auto; /* Adresse · Navigation · Kontakt · Öffnungszeiten · Rechtliches */
+		justify-content: space-between;
+		gap: 40px 32px;
+		margin-top: 48px;
+		margin-bottom: 48px;
+	}
+
+	.Gf__nav {
+		display: block;
+	}
+
+	.Gf__hours {
+		font-size: 1.5rem;
+	}
+}
+
+/* Band am Footer-Ende: nur Creme-Fläche mit Wellenlinie, keine Schrift, keine Animation */
+.typo-wrap {
+	background: var(--kt-cream);
+	min-height: 46px;
+}
+
+.typo-wrap .decorate-line {
+	width: 100%;
+	left: 0;
+}
+
+.typo-wrap .decorate-line img {
+	width: 100%;
+	height: auto;
+}
+
+/* Copyright unten links im Creme-Band, schwarz, statisch */
+.typo-copy {
+	margin: 0;
+	padding: 14px 20px 8px;
+	font-family: var(--sansserif);
+	font-weight: 600;
+	font-size: 1.2rem;
+	line-height: 1.4;
+	color: #000000;
+	text-align: left;
+	white-space: nowrap;
+}
+
+.typo-copy small {
+	font-size: inherit;
+}
+
+@media screen and (min-width: 768px) {
+	.typo-copy { padding-left: 50px; font-size: 1.3rem; }
+}
+
+@media screen and (min-width: 1280px) {
+	.typo-copy { padding-left: 80px; padding-top: 18px; }
+}
+
+/* ---------- 9. Buttons, Scroll-Reveal, Keyframes ---------- */
+
+.more__anchor {
+	background-color: var(--kt-sun);
+	color: var(--kt-ink);
+	font-family: var(--sansserif-en);
+	box-shadow: 0 4px 12px rgba(58, 74, 85, 0.08);
+	transition: transform 0.4s ease, background-color 0.4s ease, color 0.4s ease, box-shadow 0.4s ease;
+}
+
+.more__anchor:hover,
+a:hover .more__anchor,
+.homeMenu__anchor:hover .more__anchor {
+	background-color: var(--kt-sky-deep);
+	color: var(--kt-white);
+	box-shadow: 0 10px 22px rgba(95, 184, 221, 0.35);
+	transform: translate(10px, 0) scale(1.03);
+}
+
+/* Karten beim Scrollen: Fade + 16px nach oben (Klasse setzt kindertraum.js) */
+.js .newsList__item,
+.js .menuBlock {
+	opacity: 0;
+	transform: translateY(16px);
+	transition: opacity 0.6s ease-in-out, transform 0.6s ease-in-out;
+}
+
+.js .newsList__item.is-visible,
+.js .menuBlock.is-visible {
+	opacity: 1;
+	transform: translateY(0);
+}
+
+.js .newsList__item:nth-child(2) { transition-delay: 0.1s; }
+.js .newsList__item:nth-child(3) { transition-delay: 0.2s; }
+.js .newsList__item:nth-child(4) { transition-delay: 0.3s; }
+
+@keyframes kt-cloud-drift {
+	0%   { transform: translate3d(-20px, 0, 0); }
+	50%  { transform: translate3d(20px, -6px, 0); }
+	100% { transform: translate3d(-20px, 0, 0); }
+}
+
+@keyframes kt-cloud-drift-rev {
+	0%   { transform: translate3d(20px, 0, 0); }
+	50%  { transform: translate3d(-20px, -6px, 0); }
+	100% { transform: translate3d(20px, 0, 0); }
+}
+
+@keyframes kt-cloud-bob {
+	0%, 100% { transform: translate3d(0, 0, 0); }
+	50%      { transform: translate3d(8px, -6px, 0); }
+}
+
+@keyframes kt-float {
+	0%, 100% { transform: translate3d(0, 0, 0); }
+	50%      { transform: translate3d(0, -6px, 0); }
+}
+
+@keyframes kt-breathe {
+	0%, 100% { transform: scale(1); opacity: 0.85; }
+	50%      { transform: scale(1.04); opacity: 1; }
+}
+
+/* Reduzierte Bewegung: alles sofort sichtbar, keine Dauer-Animationen */
+@media (prefers-reduced-motion: reduce) {
+	.js .newsList__item,
+	.js .menuBlock {
+		opacity: 1;
+		transform: none;
+		transition: none;
+	}
+
+	.mountain-behind img,
+	.mountain--frontLeft img,
+	.mountain--frontRight img,
+	.mountain--frontBlock .mountain-frontImg img,
+	.mountain--frontBlock .kvLogo,
+	.message:before,
+	.message:after,
+	.ms_frame-bottom,
+	.sw,
+	.sw__path,
+	.sw__wing,
+	.loader .mark .loader__logo,
+	.typo-inner,
+	.img-reel__item,
+	.img-reel__item-inner {
+		animation: none !important;
+	}
+
+	.more__anchor,
+	.Gf__social-anchor,
+	.Gh .menu__button {
+		transition: none;
+	}
+
+	.more__anchor:hover,
+	a:hover .more__anchor {
+		transform: none;
+	}
+
+	.sw {
+		opacity: 1;
+		transform: translate3d(20vw, 0, 0);
+	}
+
+	/* Slideshow ohne Ken-Burns: aktuelles Bild einfach sichtbar */
+	.img-reel__item.current {
+		opacity: 1;
+	}
+
+	.img-reel__item-inner {
+		transform: none;
+	}
+}
+
+/* ==========================================================================
+   10. Unterseite „Unsere Einrichtung“ (page_about.css + Baustein bsr)
+   Nur Farben/Schrift/Text-statt-Bild – Layout bleibt aus base.css/page_about.css.
+   ========================================================================== */
+
+/* Subheader-Logo oben links (Unterseiten): größer, von einer Wolke umgeben */
+.site-subheader {
+	height: auto;
+	padding-top: 6px;
+}
+
+.site-name {
+	width: 112px;
+	height: 88px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: url(../img/clouds/cloud-badge.svg) center / contain no-repeat;
+	filter: drop-shadow(0 6px 14px rgba(58, 74, 85, 0.10));
+}
+
+.site-name img {
+	width: 58%;
+	height: auto;
+}
+
+@media all and (min-width: 768px) {
+	.site-name {
+		width: 180px;
+		height: 142px;
+	}
+}
+
+@media all and (min-width: 1280px) {
+	.site-subheader {
+		padding-top: 16px;
+	}
+
+	.site-name {
+		width: 220px;
+		height: 174px;
+	}
+}
+
+/* Seitentitel: Text statt Grafik (28/40px hoch), Untertitel darunter */
+.pageTitleContents .contents__ttl {
+	font-family: var(--sansserif-en);
+	font-weight: 700;
+	font-size: 2.8rem;
+	line-height: 1;
+	color: var(--kt-ink);
+}
+
+.pageTitleContents .contents__ttl .contents__ttl-txt {
+	display: block;
+}
+
+
+@media screen and (min-width: 1280px) {
+	.pageTitleContents .contents__ttl {
+		font-size: 4rem;
+	}
+}
+
+/* Sprungnavigation */
+.anchorList .anchorList__item .anchorList__anchor {
+	color: var(--kt-ink-soft);
+	font-family: var(--sansserif-en);
+	font-weight: 700;
+}
+
+.anchorList .anchorList__item .anchorList__anchor:hover {
+	color: var(--kt-sky-night);
+}
+
+.anchorList .anchorList__item .anchorList__anchor::after {
+	background-color: rgba(95, 184, 221, 0.5);
+}
+
+.anchorList .anchorList__item .anchorList__anchor .icon {
+	color: var(--kt-sky-deep);
+}
+
+/* Vertikale Blocktitel (Überblick / Anfahrt / Einrichtung) wie auf der Startseite */
+.vtWrap .contents__ttl .contents__ttl-txt {
+	display: block;
+	writing-mode: vertical-rl;
+	text-orientation: mixed;
+	font-family: var(--sansserif-en);
+	font-weight: 700;
+	font-size: 2rem;
+	line-height: 1;
+	letter-spacing: 0.06em;
+	color: var(--kt-ink);
+	white-space: nowrap;
+}
+
+@media screen and (min-width: 1280px) {
+	.vtWrap .contents__ttl .contents__ttl-txt {
+		font-size: 2.6rem;
+	}
+}
+
+/* Überblick */
+.ov__item {
+	border-bottom-color: var(--kt-sun);
+}
+
+.ov__item .ovTitle {
+	color: var(--kt-ink);
+	font-family: var(--sansserif-en);
+}
+
+.ov__item .ovData {
+	color: var(--kt-ink-soft);
+}
+
+.map__anchor,
+.menuBlock .map__anchor {
+	color: var(--kt-link);
+}
+
+.map__anchor:hover {
+	color: var(--kt-sky-deep);
+}
+
+.dotBox {
+	border-color: var(--kt-sun);
+}
+
+.supplyBox {
+	background-color: rgba(255, 217, 119, 0.16);
+}
+
+.supplyBox .supply__ttl,
+.telTitle,
+.access__Name,
+.directions__ttl {
+	color: var(--kt-ink);
+	font-family: var(--sansserif-en);
+}
+
+.supplyBox .telTitle .more__anchor {
+	font-size: 1.4rem;
+	line-height: 1.6;
+}
+
+.telNum,
+.telNum .tel__data {
+	color: var(--kt-ink);
+}
+
+.telNum small {
+	color: var(--kt-ink-soft);
+	line-height: 1.7;
+}
+
+.supplyList___item {
+	color: var(--kt-ink-soft);
+}
+
+.supplyList___item:before {
+	background-color: var(--kt-sun);
+}
+
+.accessInfo .dotBox {
+	background-color: var(--kt-white);
+}
+
+.directions__txt strong {
+	color: var(--kt-sky-night);
+}
+
+/* Baustein bilderslider-rundung: Farben nur über seine Variablen */
+.bsr {
+	--bsr-akzent: var(--kt-sun);
+	--bsr-akzent-still: #dcedf6;
+	--bsr-text: var(--kt-ink);
+	--bsr-flaeche: var(--kt-white);
+	--bsr-grund: var(--kt-cream);
+	font-family: var(--sansserif);
+}
+
+.bsr__titel {
+	font-family: var(--sansserif-en);
+}
+
+.bsr__status {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	overflow: hidden;
+	clip: rect(0 0 0 0);
+	white-space: nowrap;
+}
+
+/* halbe Karten: kompaktere Bühne (Vorlage: 1000×820-Bilder in halber Spalte) */
+@media screen and (min-width: 1280px) {
+	.facilityList__item.half__item .bsr {
+		--bsr-hoehe: 400px;
+	}
+}
+
+/* Karten-Reveal wie Startseite */
+.js .facilityList__item {
+	opacity: 0;
+	transform: translateY(16px);
+	transition: opacity 0.6s ease-in-out, transform 0.6s ease-in-out;
+}
+
+.js .facilityList__item.is-visible {
+	opacity: 1;
+	transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.js .facilityList__item {
+		opacity: 1;
+		transform: none;
+		transition: none;
+	}
+}
+
+/* Mobil: Titelfahne nicht in der Rundung der Bühne anschneiden */
+@media (max-width: 430px) {
+	.bsr__titel {
+		padding-left: 24px;
+	}
+}
+
+/* ==========================================================================
+   11. Unterseite „Team“ (team.html)
+   Eigene Blöcke (.team-*) auf dem Unterseiten-Gerüst (base.css/page_about.css).
+   Farben, Schriften, Rundungen und Animationen aus der bestehenden CI.
+   ========================================================================== */
+
+/* Einleitung unter dem Seitentitel */
+.team-intro {
+	max-width: 720px;
+	margin: -10px auto 50px;
+	text-align: center;
+}
+
+.team-intro__sub {
+	margin: 0 0 14px;
+	font-family: var(--sansserif-en);
+	font-weight: 600;
+	font-size: 1.9rem;
+	line-height: 1.3;
+	color: var(--kt-sky-night);
+}
+
+.team-intro__txt {
+	margin: 0;
+	font-size: 1.4rem;
+	line-height: 1.9;
+	color: var(--kt-ink);
+}
+
+/* Abschnittsköpfe (Team, Werte) */
+.team-section__head {
+	max-width: 720px;
+	margin: 0 auto 32px;
+	text-align: center;
+}
+
+.team-section__ttl {
+	display: inline-block;
+	margin: 0;
+	font-family: var(--sansserif-en);
+	font-weight: 700;
+	font-size: 2.4rem;
+	line-height: 1.2;
+	color: var(--kt-ink);
+}
+
+.team-section__lead {
+	margin: 12px 0 0;
+	font-size: 1.4rem;
+	line-height: 1.8;
+	color: var(--kt-ink-soft);
+}
+
+/* ---- Leitung: große Profilkarte ---- */
+.team-lead-card {
+	position: relative;
+	box-sizing: border-box;
+	padding: 28px 24px;
+	border-radius: 40px;
+	background-color: var(--kt-white);
+	box-shadow: 0 8px 24px rgba(58, 74, 85, 0.08);
+	overflow: hidden;
+}
+
+.team-lead-card__cloud {
+	position: absolute;
+	top: -10px;
+	right: -20px;
+	width: 160px;
+	height: auto;
+	opacity: 0.35;
+	pointer-events: none;
+	animation: kt-float 5.5s ease-in-out infinite;
+}
+
+.team-lead-card__fig {
+	position: relative;
+	z-index: 1;
+	margin: 0 0 22px;
+}
+
+.team-lead-card__img {
+	display: block;
+	width: 100%;
+	height: auto; /* überschreibt das height-Attribut */
+	aspect-ratio: 4 / 5;
+	object-fit: cover;
+	object-position: 50% 30%;
+	border-radius: 24px;
+}
+
+.team-lead-card__body {
+	position: relative;
+	z-index: 1;
+}
+
+.team-lead-card__kicker {
+	margin: 0 0 8px;
+	font-family: var(--sansserif-en);
+	font-weight: 600;
+	font-size: 1.3rem;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+	color: var(--kt-sky-night);
+}
+
+.team-lead-card__name {
+	margin: 0;
+	font-family: var(--sansserif-en);
+	font-weight: 700;
+	font-size: 2.6rem;
+	line-height: 1.15;
+	color: var(--kt-ink);
+}
+
+.team-lead-card__role {
+	margin: 6px 0 18px;
+	font-weight: 600;
+	font-size: 1.4rem;
+	color: var(--kt-ink-soft);
+}
+
+.team-lead-card__txt {
+	margin: 0 0 1em;
+	font-size: 1.4rem;
+	line-height: 1.9;
+	color: var(--kt-ink);
+}
+
+.team-lead-card__txt:last-child {
+	margin-bottom: 0;
+}
+
+/* ---- Team-Grid ---- */
+.team-grid {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 24px;
+	margin: 0 auto;
+	padding: 0;
+	list-style: none;
+}
+
+.team-card {
+	display: flex;
+	flex-direction: column;
+	box-sizing: border-box;
+	padding: 14px 14px 22px;
+	border-radius: 28px;
+	background-color: var(--kt-white);
+	box-shadow: 0 8px 24px rgba(58, 74, 85, 0.08);
+	transition: transform 0.4s ease, box-shadow 0.4s ease, opacity 0.6s ease-in-out;
+}
+
+.team-card:hover {
+	transform: translateY(-4px);
+	box-shadow: 0 14px 32px rgba(58, 74, 85, 0.14);
+}
+
+.team-card__fig {
+	margin: 0 0 16px;
+}
+
+.team-card__img {
+	display: block;
+	width: 100%;
+	height: auto; /* überschreibt das height-Attribut */
+	aspect-ratio: 4 / 5;
+	object-fit: cover;
+	object-position: 50% 30%;
+	border-radius: 18px;
+}
+
+.team-card__body {
+	padding: 0 6px;
+}
+
+.team-card__name {
+	margin: 0;
+	font-family: var(--sansserif-en);
+	font-weight: 700;
+	font-size: 1.8rem;
+	line-height: 1.2;
+	color: var(--kt-ink);
+}
+
+.team-card__role {
+	margin: 4px 0 10px;
+	font-weight: 600;
+	font-size: 1.3rem;
+	color: var(--kt-ink-soft);
+}
+
+.team-card__badge {
+	display: inline-block;
+	margin: 0 0 12px;
+	padding: 4px 12px;
+	border-radius: 100px;
+	background-color: rgba(255, 217, 119, 0.28);
+	font-family: var(--sansserif-en);
+	font-weight: 600;
+	font-size: 1.2rem;
+	line-height: 1.5;
+	color: var(--kt-ink);
+}
+
+.team-card__txt {
+	margin: 0;
+	font-size: 1.3rem;
+	line-height: 1.75;
+	color: var(--kt-ink);
+}
+
+/* ---- Werte ---- */
+.team-values {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 20px;
+	margin: 0 auto;
+	padding: 0;
+	list-style: none;
+}
+
+.team-value {
+	box-sizing: border-box;
+	padding: 28px 24px;
+	border-radius: 28px;
+	background-color: var(--kt-white);
+	box-shadow: 0 8px 24px rgba(58, 74, 85, 0.08);
+	transition: transform 0.4s ease, box-shadow 0.4s ease, opacity 0.6s ease-in-out;
+}
+
+.team-value:hover {
+	transform: translateY(-4px);
+	box-shadow: 0 14px 32px rgba(58, 74, 85, 0.14);
+}
+
+.team-value__icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 52px;
+	height: 52px;
+	margin-bottom: 16px;
+	border-radius: 100px;
+	background-color: var(--kt-sky);
+	color: var(--kt-white);
+}
+
+.team-value__icon .icon {
+	width: 26px;
+	height: 26px;
+	display: inline-block;
+}
+
+.team-value__icon .icon svg {
+	width: 26px;
+	height: 26px;
+	display: block;
+	fill: currentColor;
+}
+
+.team-value__ttl {
+	margin: 0 0 8px;
+	font-family: var(--sansserif-en);
+	font-weight: 700;
+	font-size: 1.8rem;
+	line-height: 1.2;
+	color: var(--kt-ink);
+}
+
+.team-value__txt {
+	margin: 0;
+	font-size: 1.3rem;
+	line-height: 1.8;
+	color: var(--kt-ink);
+}
+
+/* ---- CTA ---- */
+.team-cta {
+	box-sizing: border-box;
+	padding: 48px 24px;
+	border-radius: 40px;
+	background-color: var(--kt-white);
+	box-shadow: 0 8px 24px rgba(58, 74, 85, 0.08);
+	text-align: center;
+}
+
+.team-cta__ttl {
+	margin: 0 0 16px;
+	font-family: var(--sansserif-en);
+	font-weight: 700;
+	font-size: 2.4rem;
+	line-height: 1.2;
+	color: var(--kt-ink);
+}
+
+.team-cta__txt {
+	max-width: 640px;
+	margin: 0 auto 28px;
+	font-size: 1.4rem;
+	line-height: 1.9;
+	color: var(--kt-ink);
+}
+
+.team-cta__actions {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: 14px 18px;
+}
+
+.team-cta__actions .more__anchor {
+	margin: 0;
+}
+
+/* Reveal (Klasse setzt kindertraum.js; Muster wie Abschnitt 9) */
+.js .team-lead-card,
+.js .team-card,
+.js .team-value,
+.js .team-cta {
+	opacity: 0;
+	transform: translateY(16px);
+}
+
+.js .team-lead-card,
+.js .team-cta {
+	transition: opacity 0.6s ease-in-out, transform 0.6s ease-in-out;
+}
+
+.js .team-lead-card.is-visible,
+.js .team-card.is-visible,
+.js .team-value.is-visible,
+.js .team-cta.is-visible {
+	opacity: 1;
+	transform: translateY(0);
+}
+
+/* Staffelung: Karten je Reihe leicht versetzt */
+.js .team-card:nth-child(4n+2),
+.js .team-value:nth-child(2) { transition-delay: 0.1s; }
+.js .team-card:nth-child(4n+3),
+.js .team-value:nth-child(3) { transition-delay: 0.2s; }
+.js .team-card:nth-child(4n+4),
+.js .team-value:nth-child(4) { transition-delay: 0.3s; }
+
+/* Hover darf nicht von der Reveal-Verzögerung gebremst werden */
+.js .team-card.is-visible,
+.js .team-value.is-visible {
+	transition-delay: 0s;
+}
+
+@media screen and (min-width: 768px) {
+	.team-intro {
+		margin-bottom: 60px;
+	}
+
+	.team-intro__sub {
+		font-size: 2.2rem;
+	}
+
+	.team-section__ttl {
+		font-size: 2.8rem;
+	}
+
+	.team-lead-card {
+		display: grid;
+		grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+		gap: 40px;
+		align-items: center;
+		padding: 40px;
+	}
+
+	.team-lead-card__fig {
+		margin: 0;
+	}
+
+	.team-lead-card__cloud {
+		width: 220px;
+		top: -20px;
+		right: -30px;
+	}
+
+	.team-grid {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 28px;
+	}
+
+	.team-values {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 24px;
+	}
+
+	.team-cta {
+		padding: 64px 48px;
+	}
+}
+
+@media screen and (min-width: 1024px) {
+	.team-grid {
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+	}
+}
+
+@media screen and (min-width: 1280px) {
+	.team-intro {
+		margin-top: -40px;
+		margin-bottom: 80px;
+	}
+
+	.team-intro__txt,
+	.team-section__lead,
+	.team-lead-card__txt,
+	.team-cta__txt {
+		font-size: 1.5rem;
+	}
+
+	.team-section__head {
+		margin-bottom: 40px;
+	}
+
+	.team-section__ttl {
+		font-size: 3.2rem;
+	}
+
+	.team-lead-card {
+		gap: 56px;
+		padding: 56px;
+	}
+
+	.team-lead-card__name {
+		font-size: 3.2rem;
+	}
+
+	.team-grid {
+		grid-template-columns: repeat(4, minmax(0, 1fr));
+		gap: 32px;
+	}
+
+	.team-values {
+		grid-template-columns: repeat(4, minmax(0, 1fr));
+		gap: 28px;
+	}
+
+	.team-value {
+		padding: 32px 28px;
+	}
+
+	.team-cta {
+		padding: 80px 64px;
+	}
+
+	.team-cta__ttl {
+		font-size: 3rem;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.js .team-lead-card,
+	.js .team-card,
+	.js .team-value,
+	.js .team-cta {
+		opacity: 1;
+		transform: none;
+		transition: none;
+	}
+
+	.team-lead-card__cloud {
+		animation: none;
+	}
+
+	.team-card:hover,
+	.team-value:hover {
+		transform: none;
+	}
+}
+
+/* Logo bleibt ein flexibles Bild, auch mit der barrierearmen Standbild-Quelle. */
+.logo-motion { display: contents; }

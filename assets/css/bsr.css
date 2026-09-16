@@ -1,0 +1,395 @@
+/* 1:1 aus Taste Library: bilderslider-rundung (Style-Block), Farben werden in kindertraum.css per Variablen umbelegt */
+/* =========================================================================
+   Bilderslider Rundung  (.bsr-)
+   =========================================================================
+   Ein einzelnes, stark gerundetes Bild pro Ansicht, darunter eine
+   Bildunterschrift und eine Punktreihe zur Navigation. Weiterschalten per
+   Wischgeste, Pfeiltasten, Pfeilknöpfen oder optionalem Autoplay.
+
+   Gemessen am Original (yamakita-kids-klon, about/, .fcFigWrap):
+     - .swiper-slide      1080x500, border-radius 40px, overflow hidden,
+                          margin 0 20px, transition opacity 0s
+     - .swiper            padding 0 0 35px (Platz für die Punktreihe)
+     - .swiper-pagination-bullet  15x15, radius 100%, margin 0 5px,
+                          background rgb(248,181,0), transition all .3s ease
+     - .fc__ttl           22px/36.3px 700, ls 1.76px, weiße Fläche,
+                          border-radius 0 0 100px 0, absolut über dem Bild
+     - .fc__txt           16px/32px, weiße Fläche,
+                          border-radius 100px 0 100px 100px, padding
+                          40px 0 10px 50px
+     - Grundfarbe Text    rgb(48,46,46), Akzent rgb(248,181,0)
+
+   VERFAHREN: eigenständig nachgebaut, KEIN Swiper.
+   Das Original lädt Swiper.js (~140 KB) für einen Slider, der genau eine
+   Aufgabe hat: ein Bild pro Ansicht überblenden. Hier ist das als Vanilla-JS
+   in rund 120 Zeilen gelöst — ohne Abhängigkeit, ohne Bundle, und mit
+   Tastaturbedienung und Autoplay-Pause, die das Original nicht hat.
+
+   Die Bilder sind CSS-Verläufe mit SVG-Signatur, keine Originaldateien —
+   der Baustein soll ohne fremde Assets lauffähig sein.
+
+   Alles unter .bsr- gescopet: keine globalen Tag-Selektoren, keine IDs im
+   CSS, JS als IIFE. Der Baustein lässt sich neben anderen laden.
+   ========================================================================= */
+
+.bsr {
+  /* --- Farben --- */
+  --bsr-akzent:       #f8b500;   /* Punktreihe aktiv, Pfeilknöpfe */
+  --bsr-akzent-still: #e6ded0;   /* Punktreihe inaktiv */
+  --bsr-text:         #302e2e;   /* gemessen: rgb(48,46,46) */
+  --bsr-flaeche:      #ffffff;   /* Fläche hinter Titel und Unterschrift */
+  --bsr-grund:        #f7f7ee;   /* Grund des Bausteins */
+
+  /* --- Form --- */
+  --bsr-radius:       40px;      /* gemessen: 40px an .swiper-slide */
+  --bsr-hoehe:        500px;     /* gemessen: 500px Slidehöhe Desktop */
+  --bsr-punkt:        15px;      /* gemessen: 15x15 */
+  --bsr-punkt-lucke:  10px;      /* gemessen: margin 0 5px je Seite */
+  --bsr-leiste:       35px;      /* gemessen: padding-bottom 35px */
+
+  /* --- Zeiten --- */
+  --bsr-dauer:        600ms;     /* Überblendung Bildwechsel */
+  --bsr-easing:       cubic-bezier(.65, .05, .36, 1);
+  --bsr-punkt-dauer:  .3s;       /* gemessen: all 0.3s ease */
+  --bsr-autoplay:     5s;        /* Standzeit je Bild bei Autoplay */
+
+  position: relative;
+  box-sizing: border-box;
+  color: var(--bsr-text);
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+.bsr *, .bsr *::before, .bsr *::after { box-sizing: border-box; }
+
+/* --- Bühne ------------------------------------------------------------- */
+/* Die Bühne hat eine feste Höhe und schneidet an der Rundung ab. Die Slides
+   liegen alle übereinander (position:absolute) und werden über opacity
+   überblendet — nicht seitlich geschoben. Grund: bei EINEM Bild pro Ansicht
+   ist die Überblendung der ruhigere Wechsel, und die Rundung bleibt dabei
+   an derselben Stelle stehen. Ein Schiebe-Track müsste die Rundung je Slide
+   mitführen und wirkte bei 40px Radius unruhig. */
+.bsr__buehne {
+  position: relative;
+  width: 100%;
+  height: var(--bsr-hoehe);
+  border-radius: var(--bsr-radius);
+  overflow: hidden;
+  background: var(--bsr-akzent-still);
+  /* touch-action: pan-y — die horizontale Geste gehört dem Slider, die
+     vertikale bleibt beim Seitenscroll. Ohne das reißt der Browser die
+     Wischgeste an sich, sobald sie leicht schräg läuft. */
+  touch-action: pan-y;
+  cursor: grab;
+}
+.bsr__buehne:active { cursor: grabbing; }
+
+/* Der Slider ist per Tastatur bedienbar und trägt deshalb tabindex — also
+   braucht er auch einen sichtbaren Fokusring. Das Original hat weder das
+   eine noch das andere. */
+.bsr__buehne:focus-visible {
+  outline: 3px solid var(--bsr-akzent);
+  outline-offset: 4px;
+}
+
+.bsr__slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  /* visibility mit Verzögerung ausblenden: so bleibt der Slide während der
+     Überblendung sichtbar, verschwindet danach aber wirklich aus dem
+     Tab-Fluss und aus der Screenreader-Ausgabe. */
+  visibility: hidden;
+  transition: opacity var(--bsr-dauer) var(--bsr-easing),
+              transform var(--bsr-dauer) var(--bsr-easing),
+              visibility 0s linear var(--bsr-dauer);
+  transform: scale(1.03);
+}
+.bsr__slide.is-aktiv {
+  opacity: 1;
+  visibility: visible;
+  transform: scale(1);
+  transition: opacity var(--bsr-dauer) var(--bsr-easing),
+              transform var(--bsr-dauer) var(--bsr-easing);
+}
+
+/* Bildfläche: Verlauf plus ein inline-SVG-Muster. Im echten Einsatz wird
+   hier ein <img class="bsr__bild"> eingehängt — die Klasse setzt bereits
+   object-fit, damit das Bild die Fläche formatfüllend ausfüllt. */
+.bsr__bild {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.bsr__platzhalter {
+  width: 100%;
+  height: 100%;
+  background-size: 180px 180px, cover;
+  background-position: center, center;
+  background-repeat: repeat, no-repeat;
+}
+
+/* Platzhalterflächen: Verlauf plus eine feine Zeichnung als inline-SVG.
+   Absichtlich hier im Stylesheet und nicht als style-Attribut am Element —
+   in einem style="" müssten die Anführungszeichen der data-URI umschrieben
+   werden, und eine einzige ungültige Stelle wirft die ganze
+   background-image-Angabe weg, Verlauf inklusive. */
+.bsr__platzhalter--gruen {
+  background-image:
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><g fill='none' stroke='rgba(255,255,255,.38)' stroke-width='2'><circle cx='40' cy='40' r='26'/><circle cx='140' cy='110' r='38'/><path d='M0 150 Q45 120 90 150 T180 150'/></g></svg>"),
+    linear-gradient(140deg, #8fbf6a 0%, #c9dd8a 42%, #f0e7b8 100%);
+}
+.bsr__platzhalter--blau {
+  background-image:
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><g fill='none' stroke='rgba(255,255,255,.35)' stroke-width='2'><rect x='24' y='60' width='60' height='60' rx='8'/><rect x='104' y='30' width='50' height='90' rx='8'/><path d='M0 150h180'/></g></svg>"),
+    linear-gradient(140deg, #6aa8bf 0%, #8ac6dd 45%, #d8eef0 100%);
+}
+.bsr__platzhalter--sand {
+  background-image:
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><g fill='none' stroke='rgba(255,255,255,.38)' stroke-width='2'><path d='M20 140V70l40-30 40 30v70'/><circle cx='140' cy='60' r='22'/></g></svg>"),
+    linear-gradient(140deg, #bf8f6a 0%, #ddb98a 45%, #f3e6d2 100%);
+}
+.bsr__platzhalter--flieder {
+  background-image:
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><g fill='none' stroke='rgba(255,255,255,.35)' stroke-width='2'><path d='M10 40h160M10 40v100M170 40v100'/><circle cx='90' cy='95' r='30'/></g></svg>"),
+    linear-gradient(140deg, #a98fbf 0%, #c9b3dd 45%, #eee3f2 100%);
+}
+.bsr__platzhalter--rosa {
+  background-image:
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><g fill='none' stroke='rgba(255,255,255,.35)' stroke-width='2'><path d='M30 130h120M55 130V60h70v70'/><circle cx='90' cy='40' r='16'/></g></svg>"),
+    linear-gradient(140deg, #c98f9e 0%, #e6b8c5 55%, #f5e2e8 100%);
+}
+
+/* --- Titelfahne über dem Bild ------------------------------------------ */
+/* Gemessen: weiße Fläche, oben links, Rundung nur an der inneren Ecke
+   (0 0 100px 0) — die Fahne sieht aus, als läge das Bild dahinter und die
+   Fläche schneide sich eine Ecke frei. */
+.bsr__titel {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  margin: 0;
+  padding: 14px 45px 22px 26px;
+  background: var(--bsr-flaeche);
+  border-radius: 0 0 100px 0;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  line-height: 1.65;
+  color: var(--bsr-text);
+}
+
+/* --- Zähler ------------------------------------------------------------ */
+/* Zugabe gegenüber dem Original: "2 / 4" als Textangabe. Bei vier Punkten
+   ist die Position noch ablesbar, bei zehn nicht mehr. */
+.bsr__zaehler {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+  padding: 10px 22px 8px 30px;
+  background: var(--bsr-flaeche);
+  border-radius: 100px 0 0 0;
+  font-size: 13px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: .06em;
+  color: var(--bsr-text);
+}
+
+/* --- Pfeilknöpfe -------------------------------------------------------- */
+/* Das Original blendet die Pfeile auf Desktop komplett aus
+   (.facility .swiper-buttonWrap { display: none }) und lässt nur Wischen
+   und Punkte übrig. Hier sind sie sichtbar: ohne Pfeile hat ein
+   Mausnutzer ohne Touchpad-Geste keinen bequemen Weg zum nächsten Bild. */
+.bsr__pfeil {
+  position: absolute;
+  top: 50%;
+  z-index: 3;
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  margin-top: -26px;
+  padding: 0;
+  border: 0;
+  border-radius: 100px;
+  background: var(--bsr-flaeche);
+  box-shadow: 0 2px 14px rgba(48, 46, 46, .18);
+  color: var(--bsr-text);
+  font: inherit;
+  cursor: pointer;
+  transition: transform var(--bsr-punkt-dauer) ease,
+              background-color var(--bsr-punkt-dauer) ease,
+              color var(--bsr-punkt-dauer) ease,
+              opacity var(--bsr-punkt-dauer) ease;
+}
+.bsr__pfeil--zurueck { left: 18px; }
+.bsr__pfeil--vor     { right: 18px; }
+
+/* Gemessen am Menü-Button des Originals: hover -> scale3d(1.1,1.1,1.1).
+   Dieselbe Geste hier, dazu der Farbwechsel auf den Akzent. */
+.bsr__pfeil:hover {
+  transform: scale(1.1);
+  background: var(--bsr-akzent);
+  color: #fff;
+}
+.bsr__pfeil:focus-visible {
+  outline: 3px solid var(--bsr-akzent);
+  outline-offset: 3px;
+  transform: scale(1.1);
+}
+.bsr__pfeil svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2.4; }
+
+/* --- Unterschrift ------------------------------------------------------- */
+/* Gemessen: .fc__txt, weiße Fläche mit Rundung 100px 0 100px 100px, die
+   sich mit negativem Rand unter das Bild schiebt. Genau das gibt dem
+   Original sein Aussehen — die Unterschrift ist kein Text unter dem Bild,
+   sondern eine Karte, die halb darüber liegt. */
+.bsr__unterschrift {
+  position: relative;
+  z-index: 2;
+  width: 72%;
+  margin: -70px 0 0;
+  padding: 34px 40px 26px 50px;
+  background: var(--bsr-flaeche);
+  border-radius: 100px 0 100px 100px;
+  font-size: 16px;
+  line-height: 2;
+  color: var(--bsr-text);
+}
+.bsr__unterschrift b {
+  display: block;
+  margin-bottom: 2px;
+  font-size: 17px;
+  letter-spacing: .04em;
+}
+
+/* --- Punktreihe --------------------------------------------------------- */
+.bsr__punkte {
+  display: flex;
+  justify-content: center;
+  gap: var(--bsr-punkt-lucke);
+  margin: 0;
+  padding: var(--bsr-leiste) 0 0;
+  list-style: none;
+}
+.bsr__punkte li { display: block; }
+
+/* Gemessen: 15x15, radius 100%, transition all .3s ease. Der inaktive
+   Punkt ist im Original dieselbe Farbe mit geringerer Deckkraft; hier
+   eine eigene Variable, damit der Kontrast einstellbar bleibt.
+   Die Trefffläche ist über padding auf 34px gebracht — 15px sind für
+   einen Finger zu klein (Zielgröße-Empfehlung 24px aufwärts). */
+.bsr__punkt {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+.bsr__punkt::before {
+  content: "";
+  display: block;
+  width: var(--bsr-punkt);
+  height: var(--bsr-punkt);
+  border-radius: 100%;
+  background: var(--bsr-akzent-still);
+  transition: background-color var(--bsr-punkt-dauer) ease,
+              transform var(--bsr-punkt-dauer) ease;
+}
+.bsr__punkt[aria-current="true"]::before {
+  background: var(--bsr-akzent);
+  transform: scale(1.15);
+}
+.bsr__punkt:hover::before { background: var(--bsr-akzent); transform: scale(1.2); }
+.bsr__punkt:focus-visible {
+  outline: 3px solid var(--bsr-akzent);
+  outline-offset: -2px;
+  border-radius: 100px;
+}
+
+/* --- Variante: kompakt -------------------------------------------------- */
+/* Kleinere Bühne, mildere Rundung, Unterschrift über volle Breite unter dem
+   Bild statt halb darüber. Für Seitenspalten und zweispaltige Raster. */
+.bsr--kompakt {
+  --bsr-hoehe: 280px;
+  --bsr-radius: 22px;
+  --bsr-punkt: 11px;
+  --bsr-leiste: 20px;
+}
+.bsr--kompakt .bsr__unterschrift {
+  width: 100%;
+  margin-top: 14px;
+  padding: 0;
+  border-radius: 0;
+  background: none;
+  font-size: 14px;
+  line-height: 1.7;
+}
+.bsr--kompakt .bsr__titel { padding: 10px 30px 16px 18px; font-size: 16px; }
+.bsr--kompakt .bsr__pfeil { width: 40px; height: 40px; margin-top: -20px; }
+.bsr--kompakt .bsr__zaehler { padding: 8px 16px 6px 22px; font-size: 12px; }
+
+/* --- Variante: vollrund -------------------------------------------------- */
+/* Die Rundung bis zur Kapselform hochgezogen — das Extrem derselben
+   Handschrift, für einzelne Blickfänger. */
+/* Bei sehr großem Radius schneidet die Bühne die Ecken so weit ab, dass eine
+   eckig angeschlagene Titelfahne halb verschwinden würde. Deshalb rückt sie
+   hier nach innen und wird selbst rundum gekapselt — dieselbe Handschrift,
+   nur konsequent zu Ende geführt. */
+.bsr--vollrund { --bsr-radius: 160px; }
+.bsr--vollrund .bsr__titel {
+  top: 22px;
+  left: 26px;
+  padding: 8px 26px 8px 26px;
+  border-radius: 100px;
+}
+.bsr--vollrund .bsr__zaehler {
+  right: 26px;
+  bottom: 18px;
+  padding: 6px 18px;
+  border-radius: 100px;
+}
+.bsr--vollrund .bsr__unterschrift { border-radius: 100px; }
+
+/* --- Breakpoints -------------------------------------------------------- */
+/* Gemessen am Original: 1440 / 768 / 390. Die Unterschrift löst sich unter
+   768px aus der Überlappung — dort ist für eine 72%-Karte kein Platz. */
+@media (max-width: 1024px) {
+  .bsr { --bsr-hoehe: 380px; --bsr-radius: 30px; }
+  .bsr__unterschrift { width: 84%; margin-top: -50px; padding: 26px 28px 20px 36px; }
+  .bsr__titel { font-size: 19px; }
+}
+@media (max-width: 768px) {
+  .bsr { --bsr-hoehe: 300px; --bsr-radius: 24px; --bsr-leiste: 24px; }
+  .bsr__unterschrift {
+    width: 100%;
+    margin-top: 16px;
+    padding: 0;
+    border-radius: 0;
+    background: none;
+    font-size: 15px;
+    line-height: 1.75;
+  }
+  .bsr__pfeil { width: 42px; height: 42px; margin-top: -21px; }
+  .bsr__pfeil--zurueck { left: 10px; }
+  .bsr__pfeil--vor { right: 10px; }
+}
+@media (max-width: 430px) {
+  .bsr { --bsr-hoehe: 220px; --bsr-radius: 18px; --bsr-punkt: 11px; }
+  .bsr__titel { padding: 8px 28px 14px 14px; font-size: 15px; }
+  .bsr__zaehler { padding: 7px 14px 5px 20px; font-size: 11px; }
+}
+
+/* Bewegung nur, wenn der Nutzer sie nicht abbestellt hat. Der Wechsel
+   passiert dann hart — funktional identisch, nur ohne Überblendung.
+   Autoplay wird im JS zusätzlich gar nicht erst gestartet. */
+@media (prefers-reduced-motion: reduce) {
+  .bsr__slide { transition: none; transform: none; }
+  .bsr__slide.is-aktiv { transform: none; }
+  .bsr__pfeil, .bsr__punkt::before { transition: none; }
+}
