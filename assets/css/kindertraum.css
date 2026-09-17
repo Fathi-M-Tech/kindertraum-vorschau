@@ -238,77 +238,103 @@ a:hover {
 	}
 }
 
-/* Logo + Name unten links im Wolkenfeld (statt zentriert über der mittleren Wolke) */
+/* Das Logo sitzt eigenständig mittig auf der vorderen Wolkenbank. */
 .mountain--frontBlock .kvLogo {
 	z-index: 2;
-	left: 20px;
-	right: auto;
-	bottom: calc(30vh - 70px); /* Block-Unterkante liegt bei 130vh → sichtbar am unteren Hero-Rand */
-	width: auto;
+	left: 0;
+	right: 0;
+	bottom: calc(30vh - 95px);
+	width: max-content;
 	max-width: none;
-	display: flex;
-	align-items: center;
-	gap: 12px;
-	pointer-events: auto;
+	display: block;
+	pointer-events: none;
+}
+
+.mountain--frontBlock .kvLogo img {
+	display: block;
+	width: 92px;
+	height: auto;
 	animation: kt-float 5.5s ease-in-out infinite;
 	filter: drop-shadow(0 8px 18px rgba(58, 74, 85, 0.12));
 }
 
-.mountain--frontBlock .kvLogo img {
-	width: 72px;
-	height: auto;
-	flex: 0 0 auto;
-}
-
-.kvLogo__txt {
+.kvHeroText {
+	position: absolute;
+	z-index: 2;
+	left: 24px;
+	bottom: calc(30vh + 40px);
 	display: flex;
 	flex-direction: column;
+	align-items: flex-start;
+	width: calc(100% - 48px);
 	color: var(--kt-ink);
-	line-height: 1.2;
+	line-height: 1.08;
+	filter: drop-shadow(0 4px 16px rgba(255, 255, 255, .5));
 }
 
 .kvLogo__welcome,
 .kvLogo__name {
+	display: block;
+	margin: 0;
 	font-family: var(--sansserif-en);
 	font-weight: 700;
-	font-size: 1.8rem;
 }
 
 .kvLogo__welcome {
-	margin-bottom: 0.1em;
+	font-size: clamp(29px, 7vw, 38px);
+	line-height: 1.1;
+}
+
+.kvLogo__name {
+	max-width: 100%;
+	font-size: clamp(30px, 7.5vw, 42px);
+	line-height: 1.08;
+	letter-spacing: -.025em;
 }
 
 .kvLogo__sub {
-	margin-top: 0.25em;
+	margin-top: .45em;
 	font-family: var(--sansserif);
-	font-weight: 600;
-	font-size: 1.2rem;
-	letter-spacing: 0.06em;
+	font-weight: 700;
+	font-size: 15px;
+	letter-spacing: .08em;
 	color: var(--kt-ink-soft);
 }
 
 @media screen and (min-width: 768px) {
 	.mountain--frontBlock .kvLogo {
-		left: 40px;
-		bottom: calc(30vh - 50px);
-		gap: 18px;
+		bottom: calc(30vh - 70px);
 	}
-	.mountain--frontBlock .kvLogo img { width: 110px; }
-	.kvLogo__welcome,
-	.kvLogo__name { font-size: 2.6rem; }
-	.kvLogo__sub { font-size: 1.4rem; }
+	.mountain--frontBlock .kvLogo img { width: 128px; }
+	.kvHeroText {
+		left: 42px;
+		bottom: calc(30vh + 75px);
+		width: calc(100% - 84px);
+	}
+	.kvLogo__welcome { font-size: 38px; }
+	.kvLogo__name { font-size: 42px; }
+	.kvLogo__sub { font-size: 17px; }
+}
+
+@media screen and (min-width: 901px) {
+	.mountain--frontBlock .kvLogo {
+		bottom: calc(30vh - 45px);
+	}
+	.kvHeroText {
+		bottom: calc(30vh - 40px);
+		width: calc(50% - 150px);
+	}
 }
 
 @media screen and (min-width: 1280px) {
-	.mountain--frontBlock .kvLogo {
-		left: 60px;
-		bottom: calc(30vh - 40px);
-		gap: 22px;
+	.mountain--frontBlock .kvLogo img { width: 162px; }
+	.kvHeroText {
+		left: 64px;
+		width: calc(50% - 160px);
 	}
-	.mountain--frontBlock .kvLogo img { width: 140px; }
-	.kvLogo__welcome,
-	.kvLogo__name { font-size: 3.2rem; }
-	.kvLogo__sub { font-size: 1.6rem; }
+	.kvLogo__welcome { font-size: clamp(40px, 2.5vw, 50px); }
+	.kvLogo__name { font-size: clamp(42px, 2.7vw, 54px); }
+	.kvLogo__sub { font-size: 19px; }
 }
 
 /* Shinkansen-Slot bleibt im DOM, wird nicht mehr genutzt (Ballon entfernt, 15.09.2026) */
@@ -1089,6 +1115,7 @@ a:hover .more__anchor,
 	.mountain--frontRight img,
 	.mountain--frontBlock .mountain-frontImg img,
 	.mountain--frontBlock .kvLogo,
+	.mountain--frontBlock .kvLogo img,
 	.message:before,
 	.message:after,
 	.ms_frame-bottom,
