@@ -2347,6 +2347,10 @@ a:hover .more__anchor,
 	opacity: 0.4;
 }
 
+.groupTile__motion {
+	display: contents;
+}
+
 .groupTile__img {
 	position: relative;
 	width: 78%;
