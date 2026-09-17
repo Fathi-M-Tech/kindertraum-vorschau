@@ -10,7 +10,7 @@
 
 	// 1. Scroll-Reveal ------------------------------------------------------
 	function reveal() {
-		var items = document.querySelectorAll(".newsList__item, .menuBlock, .facilityList__item, .team-lead-card, .team-card, .team-value, .team-cta, .kontakt-card");
+		var items = document.querySelectorAll(".newsList__item, .menuBlock, .facilityList__item, .team-lead-card, .team-card, .team-value, .team-cta, .kontakt-card, .groupTile");
 		var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 		if (!("IntersectionObserver" in window) || reduce) {
@@ -60,7 +60,7 @@
 		function syncVisitField() {
 			var isVisit = requestType.value === "besichtigung";
 			visitField.classList.toggle("is-active", isVisit);
-			submitBtn.textContent = isVisit ? "Besichtigung anfragen" : "Nachricht senden";
+			submitBtn.querySelector(".kontakt-form__submit-label").textContent = isVisit ? "Besichtigung anfragen" : "Nachricht senden";
 		}
 
 		requestType.addEventListener("change", syncVisitField);

@@ -63,6 +63,11 @@
 							</a>
 						</li>
 						<li class="g-nav__li anm">
+							<a href="gruppen.html" class="g-nav__anchor">
+								<span class="lbl">Gruppen</span>
+							</a>
+						</li>
+						<li class="g-nav__li anm">
 							<a href="#message" class="g-nav__anchor">
 								<span class="lbl">Familienzentrum</span>
 							</a>
@@ -478,25 +483,30 @@
 				<!-- ============================================================ -->
 				<div id="kontakt" class="kontakt c-section--m">
 					<div class="kontaktContents w-state">
-						<div class="titleContents">
-							<h2 class="contents__ttl h-ut">
-								<span class="contents__ttl-txt">Wir freuen uns, Sie kennenzulernen!</span>
-							</h2>
+						<div class="kontakt__header">
+							<div>
+								<p class="kontakt__eyebrow"><span aria-hidden="true"></span> Kontakt zu Kindertraum</p>
+								<h2 class="kontakt__title">Ein guter Anfang<br><em>beginnt mit Hallo.</em></h2>
+							</div>
+							<p class="kontakt__intro">Sie haben Fragen zu unserer Kita oder möchten uns persönlich kennenlernen? Schreiben Sie uns. Wir freuen uns darauf, von Ihnen und Ihrem Kind zu hören.</p>
 						</div>
-						<p class="kontakt__intro">Sie haben Fragen zu unserer Kita oder möchten sich Kindertraum einmal persönlich anschauen? Schreiben Sie uns gerne oder vereinbaren Sie einen Termin für eine Besichtigung. Wir freuen uns darauf, Sie und Ihr Kind kennenzulernen.</p>
 
 						<div class="kontakt__grid">
 							<div class="kontakt-card kontakt__formCol">
+								<div class="kontakt__card-heading">
+									<div><span class="kontakt__step">01 / NACHRICHT</span><h3>Schreiben Sie uns</h3></div>
+									<p>Wir sind für Sie da.</p>
+								</div>
 								<form class="kontakt-form" novalidate>
 									<div class="kontakt-form__row">
 										<label class="kontakt-form__field">
-											<span class="kontakt-form__label">Name der Eltern / Erziehungsberechtigten *</span>
+											<span class="kontakt-form__label">Ihr Name <span aria-hidden="true">*</span></span>
 											<input type="text" name="parent_name" autocomplete="name" required>
 										</label>
 									</div>
 									<div class="kontakt-form__row kontakt-form__row--split">
 										<label class="kontakt-form__field">
-											<span class="kontakt-form__label">E-Mail-Adresse *</span>
+											<span class="kontakt-form__label">E-Mail-Adresse <span aria-hidden="true">*</span></span>
 											<input type="email" name="email" autocomplete="email" required>
 										</label>
 										<label class="kontakt-form__field">
@@ -540,12 +550,12 @@
 									</div>
 									<div class="kontakt-form__row">
 										<label class="kontakt-form__field">
-											<span class="kontakt-form__label">Nachricht *</span>
+											<span class="kontakt-form__label">Ihre Nachricht <span aria-hidden="true">*</span></span>
 											<textarea name="message" rows="4" required></textarea>
 										</label>
 									</div>
 									<div class="kontakt-form__row kontakt-form__actions">
-										<button type="submit" class="more__anchor kontakt-form__submit" id="kontaktSubmitBtn">Nachricht senden</button>
+										<button type="submit" class="kontakt-form__submit" id="kontaktSubmitBtn"><span class="kontakt-form__submit-label">Nachricht senden</span><span aria-hidden="true">↗</span></button>
 										<p class="kontakt-form__hint">Wir melden uns so schnell wie möglich bei Ihnen zurück.</p>
 									</div>
 									<p class="kontakt-form__success" hidden>Vielen Dank für Ihre Nachricht! Wir freuen uns darauf, Sie und Ihr Kind kennenzulernen und melden uns bald bei Ihnen.</p>
@@ -553,18 +563,20 @@
 							</div>
 
 							<div class="kontakt-card kontakt__infoCol">
-								<!-- Hinweis: Google-Maps-Einbettung lädt Daten von Google – vor Live-Schaltung an die Cookie-/Consent-Lösung koppeln. -->
-								<iframe class="kontakt__map-frame" src="https://www.google.com/maps?q=Wilhelm-Kattwinkel-Str.+7,+58513+L%C3%BCdenscheid&amp;hl=de&amp;z=16&amp;output=embed" title="Karte: Kindergarten Kindertraum e.V., Wilhelm-Kattwinkel-Str. 7, 58513 Lüdenscheid" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+								<span class="kontakt__step">02 / VOR ORT</span>
+								<h3 class="kontakt__info-title">Hier finden Sie uns.</h3>
+								<p class="kontakt__info-intro">Ein Besuch sagt oft mehr als viele Worte. Lernen Sie unsere Räume und den Kita-Alltag persönlich kennen.</p>
+								<a href="#kontakt" class="kontakt__visit-btn" id="kontaktVisitCta">Besichtigung anfragen <span aria-hidden="true">↗</span></a>
 								<div class="kontakt__details">
-									<p class="kontakt__details-address">Kindergarten Kindertraum e.V.<br>Wilhelm-Kattwinkel-Str. 7<br>58513 Lüdenscheid</p>
-									<p class="kontakt__details-line"><a href="tel:+492351679678" class="kontakt__details-link">02351 679678</a></p>
-									<p class="kontakt__details-line"><a href="mailto:mail@kindergarten-kindertraum.de" class="kontakt__details-link">mail@kindergarten-kindertraum.de</a></p>
-									<p class="kontakt__details-line kontakt__details-hours">Mo–Do 07:00–16:30 · Fr 07:00–15:30</p>
+									<div class="kontakt__detail"><span class="kontakt__detail-label">Adresse</span><address>Kindergarten Kindertraum e.V.<br>Wilhelm-Kattwinkel-Str. 7<br>58513 Lüdenscheid</address></div>
+									<div class="kontakt__detail"><span class="kontakt__detail-label">Telefon</span><a href="tel:+492351679678">02351 679678</a></div>
+									<div class="kontakt__detail"><span class="kontakt__detail-label">E-Mail</span><a href="mailto:mail@kindergarten-kindertraum.de">mail@kindergarten-kindertraum.de</a></div>
+									<div class="kontakt__detail"><span class="kontakt__detail-label">Öffnungszeiten</span><span>Mo–Do 07:00–16:30<br>Fr 07:00–15:30</span></div>
 								</div>
-								<div class="kontakt__visit">
-									<p class="kontakt__visit-ttl">Kommen Sie uns besuchen</p>
-									<p class="kontakt__visit-txt">Bei einem persönlichen Besuch bekommen Sie den besten Eindruck von unserem Kita-Alltag, unseren Räumen und unserer Atmosphäre.</p>
-									<a href="#kontakt" class="more__anchor kontakt__visit-btn" id="kontaktVisitCta">Besichtigung anfragen</a>
+								<div class="kontakt__map-wrap">
+									<!-- Google-Maps-Einbettung vor Live-Schaltung an die Cookie-/Consent-Lösung koppeln. -->
+									<iframe class="kontakt__map-frame" src="https://www.google.com/maps?q=Wilhelm-Kattwinkel-Str.+7,+58513+L%C3%BCdenscheid&amp;hl=de&amp;z=16&amp;output=embed" title="Karte: Kindergarten Kindertraum e.V., Wilhelm-Kattwinkel-Str. 7, 58513 Lüdenscheid" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+									<a class="kontakt__map-link" href="https://www.google.com/maps/search/?api=1&amp;query=Wilhelm-Kattwinkel-Str.+7%2C+58513+L%C3%BCdenscheid" target="_blank" rel="noopener noreferrer">Route planen <span aria-hidden="true">↗</span></a>
 								</div>
 							</div>
 						</div>
@@ -604,6 +616,7 @@
 				<li class="Gf__nav__item"><a href="#news" class="Gf__nav__anchor"><span class="lbl">Aktuelles</span></a></li>
 				<li class="Gf__nav__item"><a href="#message" class="Gf__nav__anchor"><span class="lbl">Über uns</span></a></li>
 				<li class="Gf__nav__item"><a href="unsere-einrichtung.html" class="Gf__nav__anchor"><span class="lbl">Unsere Einrichtung</span></a></li>
+				<li class="Gf__nav__item"><a href="gruppen.html" class="Gf__nav__anchor"><span class="lbl">Gruppen</span></a></li>
 				<li class="Gf__nav__item"><a href="team.html" class="Gf__nav__anchor"><span class="lbl">Team</span></a></li>
 			</ul>
 		</div>
