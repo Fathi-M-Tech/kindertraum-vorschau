@@ -202,6 +202,18 @@ function GlobalNav() {
 			gh.classList.remove("-show");
 		}
 	}, false);
+
+	// Menü nach Klick auf einen Menüpunkt schließen, damit es beim
+	// Scrollen zur Zielsektion nicht geöffnet stehen bleibt.
+	const navLinks = document.querySelectorAll(".g-nav__anchor");
+	for (let i = 0; i < navLinks.length; i++) {
+		navLinks[i].addEventListener("click", function() {
+			if (gh.classList.contains("-show")) {
+				gh.classList.remove("-show");
+				gh.classList.add("-hide");
+			}
+		}, false);
+	}
 }
 
 
