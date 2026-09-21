@@ -238,12 +238,21 @@ a:hover {
 	}
 }
 
-/* Das Logo sitzt eigenständig mittig auf der vorderen Wolkenbank. */
-.mountain--frontBlock .kvLogo {
+/* Logo und Überschrift als gemeinsames Lockup: Logo links, Text rechts daneben. */
+.mountain--frontBlock .kvHero {
+	position: absolute;
 	z-index: 2;
-	left: 0;
-	right: 0;
-	bottom: calc(30vh - 95px);
+	left: 24px;
+	bottom: calc(30vh + 20px);
+	display: flex;
+	align-items: center;
+	gap: 14px;
+	width: calc(100% - 48px);
+}
+
+.mountain--frontBlock .kvLogo {
+	position: static;
+	flex: 0 0 auto;
 	width: max-content;
 	max-width: none;
 	display: block;
@@ -252,21 +261,20 @@ a:hover {
 
 .mountain--frontBlock .kvLogo img {
 	display: block;
-	width: 92px;
+	width: 72px;
 	height: auto;
 	animation: kt-float 5.5s ease-in-out infinite;
 	filter: drop-shadow(0 8px 18px rgba(58, 74, 85, 0.12));
 }
 
 .kvHeroText {
-	position: absolute;
+	position: static;
 	z-index: 2;
-	left: 24px;
-	bottom: calc(30vh + 40px);
+	flex: 1 1 auto;
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
-	width: calc(100% - 48px);
+	min-width: 0;
 	color: var(--kt-ink);
 	line-height: 1.08;
 	filter: drop-shadow(0 4px 16px rgba(255, 255, 255, .5));
@@ -302,36 +310,31 @@ a:hover {
 }
 
 @media screen and (min-width: 768px) {
-	.mountain--frontBlock .kvLogo {
-		bottom: calc(30vh - 70px);
-	}
-	.mountain--frontBlock .kvLogo img { width: 128px; }
-	.kvHeroText {
+	.mountain--frontBlock .kvHero {
 		left: 42px;
-		bottom: calc(30vh + 75px);
+		bottom: calc(30vh + 55px);
+		gap: 20px;
 		width: calc(100% - 84px);
 	}
+	.mountain--frontBlock .kvLogo img { width: 104px; }
 	.kvLogo__welcome { font-size: 38px; }
 	.kvLogo__name { font-size: 42px; }
 	.kvLogo__sub { font-size: 17px; }
 }
 
 @media screen and (min-width: 901px) {
-	.mountain--frontBlock .kvLogo {
-		bottom: calc(30vh - 45px);
-	}
-	.kvHeroText {
-		bottom: calc(30vh - 40px);
-		width: calc(50% - 150px);
+	.mountain--frontBlock .kvHero {
+		bottom: calc(30vh - 20px);
+		width: calc(50% - 130px);
 	}
 }
 
 @media screen and (min-width: 1280px) {
-	.mountain--frontBlock .kvLogo img { width: 162px; }
-	.kvHeroText {
+	.mountain--frontBlock .kvHero {
 		left: 64px;
-		width: calc(50% - 160px);
+		width: calc(50% - 140px);
 	}
+	.mountain--frontBlock .kvLogo img { width: 128px; }
 	.kvLogo__welcome { font-size: clamp(40px, 2.5vw, 50px); }
 	.kvLogo__name { font-size: clamp(42px, 2.7vw, 54px); }
 	.kvLogo__sub { font-size: 19px; }
@@ -642,7 +645,7 @@ a:hover {
 }
 
 .msgQuote {
-	margin: 2.4em 0 0;
+	margin: 2.4em 0 140px;
 	padding: 1.4em 1.8em;
 	border-left: 4px solid var(--kt-sun);
 	background: rgba(255, 255, 255, 0.55);
@@ -713,16 +716,24 @@ a:hover {
 }
 
 /* ---------- 6. Aktuelles (#news) ---------- */
-
-.news .contents__ttl {
+/* .titleContents .contents__ttl gilt fuer alle Sektions-Ueberschriften im
+   h-ut-Stil (Highlights/Unsere Einrichtung/Gruppen/Tagesablauf/Team), nicht
+   nur fuer #news, damit sie alle die Marken-Tinte statt der Vorlagenfarbe
+   bekommen. */
+.titleContents .contents__ttl {
+	width: fit-content;
+	max-width: 100%;
+	margin-right: auto;
+	margin-left: auto;
 	font-family: var(--sansserif-en);
 	font-weight: 700;
 	font-size: 2.4rem;
 	line-height: 1;
 	color: var(--kt-ink);
+	text-align: center;
 }
 
-.news .contents__ttl .contents__ttl-txt {
+.titleContents .contents__ttl .contents__ttl-txt {
 	display: block;
 	line-height: 25px; /* Höhe der Titelgrafik in der Vorlage */
 }
@@ -747,7 +758,7 @@ a:hover {
 }
 
 @media screen and (min-width: 1280px) {
-	.news .contents__ttl {
+	.titleContents .contents__ttl {
 		font-size: 3rem;
 	}
 }
@@ -810,11 +821,10 @@ a:hover {
 }
 
 /* ---------- 8. Footer (#Gf) ---------- */
-/* Layout: 4-spaltiges Grid (Kontakt · Seiten · Rechtliches · Folgen Sie uns) statt der
-   Flex-Blöcke der Vorlage. Farben/Typografie unverändert – nur Anordnung und Größen. */
 
 .Gf {
-	background-color: var(--kt-sky-deep); /* Wunsch Fathi: gleiches Blau wie Menü-Button/-Linien */
+	padding-bottom: clamp(48px, 6vw, 84px);
+	background-color: var(--kt-sky-deep);
 	color: var(--kt-white);
 }
 
@@ -830,7 +840,7 @@ a:hover {
 	gap: 36px 32px;
 	align-items: start;
 	margin-top: 24px;
-	margin-bottom: 56px;
+	margin-bottom: 0;
 }
 
 .Gf__layoutblock,
@@ -867,6 +877,20 @@ a:hover {
 .Gf__identity .Gf__address-tbl__des {
 	width: auto;
 	margin: 0;
+	font-style: normal;
+	font-size: 1.4rem;
+	font-weight: 500;
+	line-height: 1.75;
+	color: rgba(255, 255, 255, 0.9);
+}
+
+.Gf__brand-name {
+	margin: 0 0 5px;
+	font-family: var(--sansserif-en);
+	font-size: 1.6rem;
+	font-weight: 800;
+	line-height: 1.35;
+	color: var(--kt-white);
 }
 
 .Gf__address-tbl,
@@ -877,46 +901,41 @@ a:hover {
 
 .Gf__hours {
 	margin: 0;
-	font-size: 1.3rem; /* wie .Gf__nav__anchor */
-	font-weight: 600;
+	font-size: 1.4rem;
+	font-weight: 500;
+	line-height: 1.8;
 	color: rgba(255, 255, 255, 0.9);
 }
 
-
-/* Google-Maps-Karte: dezent, direkt unter dem Kontaktblock, wie eine Kachel der übrigen Elemente */
-.Gf__map {
-	padding-top: 16px;
-}
-
-.Gf__map-frame {
-	display: block;
-	width: 100%;
-	height: 150px;
-	border: 1px solid rgba(255, 255, 255, 0.35);
-	border-radius: 16px;
-	background: rgba(255, 255, 255, 0.25);
-	box-shadow: none;
-}
-
-/* Spaltentitel (Klasse aus base.css, dort grau) */
 .Gf__section-ttl {
-	margin: 0 0 8px;
-	font-family: var(--sansserif-en); /* wie bisher „Folgen Sie uns“ */
-	font-weight: 600;
-	letter-spacing: .085rem;
-	color: rgba(255, 255, 255, 0.7);
+	margin: 0 0 14px;
+	font-family: var(--sansserif-en);
+	font-size: 1.6rem;
+	font-weight: 800;
+	line-height: 1.3;
+	letter-spacing: .04em;
+	color: var(--kt-white);
 }
 
 .Gf__section-ttl--follow {
-	margin-top: 24px;
+	margin-top: 28px;
 }
 
 .Gf__nav__list {
+	display: grid;
+	gap: 5px;
+	margin: 0;
 	margin-right: 0;
 }
 
 .Gf__nav__item .Gf__nav__anchor {
-	overflow-wrap: anywhere; /* E-Mail-Adresse darf in schmalen Spalten umbrechen (<wbr> nach @) */
+	display: inline-block;
+	padding: 2px 0;
+	font-size: 1.4rem;
+	font-weight: 500;
+	line-height: 1.55;
+	color: rgba(255, 255, 255, 0.9);
+	overflow-wrap: anywhere;
 }
 
 .Gf__social {
@@ -950,6 +969,36 @@ a:hover {
 	fill: currentColor;
 }
 
+.Gf__nav__anchor--icon {
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+}
+
+.Gf__nav__anchor--icon .icon,
+.Gf__hours--icon .icon {
+	width: 18px;
+	height: 18px;
+	flex: 0 0 18px;
+	stroke-width: 2.6;
+	color: var(--kt-white);
+}
+
+.Gf__nav__anchor--icon .icon svg,
+.Gf__hours--icon .icon svg {
+	display: block;
+}
+
+.Gf__hours--icon {
+	display: flex;
+	align-items: flex-start;
+	gap: 8px;
+}
+
+.Gf__hours--icon .icon {
+	margin-top: 3px;
+}
+
 .Gf__social-anchor:hover {
 	background: var(--kt-white);
 	color: var(--kt-sky-night);
@@ -961,77 +1010,34 @@ a:hover {
 	.Gf__other {
 		grid-template-columns: 1fr 1fr;
 		gap: 40px 48px;
-		margin-bottom: 56px;
 	}
 
 	.Gf-logo img {
 		width: 72px;
 	}
-
-	.Gf__map {
-		max-width: 420px;
-	}
 }
 
 @media screen and (min-width: 1280px) {
-	/* Spalten inhaltsbreit, freier Raum gleichmäßig zwischen den Spalten verteilt →
-	   gleiche Abstände zwischen allen Rubriken, unabhängig von der Viewport-Breite */
 	.Gf__other {
-		grid-template-columns: minmax(360px, auto) auto auto auto auto; /* Adresse · Navigation · Kontakt · Öffnungszeiten · Rechtliches */
-		justify-content: space-between;
-		gap: 40px 32px;
+		grid-template-columns: minmax(260px, 1.15fr) minmax(125px, .7fr) minmax(250px, 1.1fr) minmax(160px, .75fr) minmax(130px, .65fr);
+		gap: 36px;
 		margin-top: 48px;
-		margin-bottom: 48px;
 	}
 
 	.Gf__nav {
 		display: block;
 	}
 
+	.Gf__brand-name,
+	.Gf__section-ttl {
+		font-size: 1.8rem;
+	}
+
+	.Gf__identity .Gf__address-tbl__des,
+	.Gf__nav__item .Gf__nav__anchor,
 	.Gf__hours {
 		font-size: 1.5rem;
 	}
-}
-
-/* Band am Footer-Ende: nur Creme-Fläche mit Wellenlinie, keine Schrift, keine Animation */
-.typo-wrap {
-	background: var(--kt-cream);
-	min-height: 46px;
-}
-
-.typo-wrap .decorate-line {
-	width: 100%;
-	left: 0;
-}
-
-.typo-wrap .decorate-line img {
-	width: 100%;
-	height: auto;
-}
-
-/* Copyright unten links im Creme-Band, schwarz, statisch */
-.typo-copy {
-	margin: 0;
-	padding: 14px 20px 8px;
-	font-family: var(--sansserif);
-	font-weight: 600;
-	font-size: 1.2rem;
-	line-height: 1.4;
-	color: #000000;
-	text-align: left;
-	white-space: nowrap;
-}
-
-.typo-copy small {
-	font-size: inherit;
-}
-
-@media screen and (min-width: 768px) {
-	.typo-copy { padding-left: 50px; font-size: 1.3rem; }
-}
-
-@media screen and (min-width: 1280px) {
-	.typo-copy { padding-left: 80px; padding-top: 18px; }
 }
 
 /* ---------- 9. Buttons, Scroll-Reveal, Keyframes ---------- */
@@ -1272,6 +1278,61 @@ a:hover .more__anchor,
 	color: var(--kt-ink-soft);
 }
 
+.ovData--placeholder span {
+	color: var(--kt-sky-night);
+	font-weight: 700;
+}
+
+.ovData--contact {
+	display: flex;
+	flex-wrap: wrap;
+	gap: .3em 1.25em;
+	align-items: baseline;
+}
+
+.ovData--contact a {
+	border: 0;
+	color: var(--kt-link);
+	text-decoration: none;
+}
+
+.ovData--contact a span {
+	font-weight: 700;
+	color: var(--kt-ink);
+}
+
+.ovData--contact a:hover,
+.ovData--contact a:focus-visible {
+	color: var(--kt-sky-deep);
+	text-decoration: underline;
+	text-underline-offset: 3px;
+}
+
+.ovData--contact a:focus-visible {
+	outline: 2px solid var(--kt-sun);
+	outline-offset: 3px;
+}
+
+@media screen and (min-width: 1280px) {
+	.overviewList {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		column-gap: 40px;
+		align-items: stretch;
+	}
+
+	.overviewList .ov__item {
+		box-sizing: border-box;
+		width: 100%;
+	}
+}
+
+@media screen and (max-width: 767px) {
+	.ovData--contact {
+		flex-direction: column;
+		gap: .2em;
+	}
+}
 .map__anchor,
 .menuBlock .map__anchor {
 	color: var(--kt-link);
@@ -1287,6 +1348,10 @@ a:hover .more__anchor,
 
 .supplyBox {
 	background-color: rgba(255, 217, 119, 0.16);
+}
+
+.overview-note {
+	margin-top: clamp(32px, 4vw, 60px);
 }
 
 .supplyBox .supply__ttl,
@@ -1394,7 +1459,7 @@ a:hover .more__anchor,
 /* Einleitung unter dem Seitentitel */
 .team-intro {
 	max-width: 720px;
-	margin: -10px auto 50px;
+	margin: 0 auto 50px;
 	text-align: center;
 }
 
@@ -1791,7 +1856,7 @@ a:hover .more__anchor,
 
 @media screen and (min-width: 1280px) {
 	.team-intro {
-		margin-top: -40px;
+		margin-top: 0;
 		margin-bottom: 80px;
 	}
 
@@ -2044,6 +2109,77 @@ a:hover .more__anchor,
 	box-shadow: 0 0 0 3px rgba(95, 184, 221, .22);
 }
 
+.kontakt-form__child-row {
+	position: relative;
+}
+
+.kontakt-form__child-row + .kontakt-form__child-row {
+	margin-top: 22px;
+	padding-top: 22px;
+	border-top: 1px dashed #dfe6e9;
+}
+
+.kontakt-form__remove-child {
+	position: absolute;
+	top: -2px;
+	right: 0;
+	display: grid;
+	place-items: center;
+	width: 26px;
+	height: 26px;
+	border: 0;
+	border-radius: 50%;
+	background: #f8f9f7;
+	color: var(--kt-ink-soft);
+	font-size: 15px;
+	line-height: 1;
+	cursor: pointer;
+	transition: background-color .2s ease, color .2s ease;
+}
+
+.kontakt-form__remove-child:hover,
+.kontakt-form__remove-child:focus-visible {
+	background: var(--kt-sun);
+	color: var(--kt-ink);
+	outline: none;
+}
+
+/* !important auf background/padding noetig: schlaegt die Vorlagen-Regel
+   button{background-color:var(--color-link)!important; padding:15px 20px}
+   (base.css) – Button soll neutral (schwarz/weiss) wie der Rest der Box bleiben. */
+.kontakt-form__add-child {
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	border: 0;
+	background: none !important;
+	padding: 0 !important;
+	border-radius: 0 !important;
+	color: var(--kt-ink);
+	font-family: var(--sansserif);
+	font-size: 14px;
+	font-weight: 700;
+	cursor: pointer;
+}
+
+.kontakt-form__add-child span[aria-hidden="true"] {
+	display: grid;
+	place-items: center;
+	width: 22px;
+	height: 22px;
+	border-radius: 50%;
+	background: var(--kt-ink);
+	color: var(--kt-white);
+	font-size: 15px;
+	line-height: 1;
+}
+
+.kontakt-form__add-child:hover,
+.kontakt-form__add-child:focus-visible {
+	color: var(--kt-ink-soft);
+	outline: none;
+}
+
 .kontakt-form__conditional {
 	overflow: hidden;
 	max-height: 0;
@@ -2086,7 +2222,9 @@ a:hover .more__anchor,
 }
 
 .kontakt-form__submit {
-	background: var(--kt-sky-night);
+	justify-content: center;
+	padding: 12px 26px;
+	/* Hintergrund kommt von der Vorlagen-Regel button{...!important} (base.css), Farbe = --color-link = --kt-sun */
 	color: var(--kt-white);
 }
 
@@ -2207,7 +2345,8 @@ a:hover .more__anchor,
 }
 
 .kontakt__detail address { font: inherit; }
-.kontakt__detail a { min-width: 0; color: var(--kt-ink); text-decoration: underline; text-underline-offset: 3px; overflow-wrap: anywhere; }
+/* !important noetig: schlaegt die Vorlagen-Regel main a[href^="tel"]{text-decoration:underline} (base.css) */
+.kontakt__detail a { min-width: 0; color: var(--kt-ink); text-decoration: none !important; overflow-wrap: anywhere; }
 .kontakt__detail a:hover { color: var(--kt-sky-night); }
 
 .kontakt__map-wrap {
@@ -2336,7 +2475,7 @@ a:hover .more__anchor,
 .groupTile__fig:before {
 	content: "";
 	position: absolute;
-	inset: 6%;
+	inset: -2%;
 	border-radius: 50%;
 	background: var(--kt-sky);
 	opacity: 0.35;
@@ -2354,7 +2493,7 @@ a:hover .more__anchor,
 .groupTile__img {
 	position: relative;
 	width: 78%;
-	height: auto;
+	height: 78%;
 	object-fit: contain;
 }
 
@@ -2419,147 +2558,331 @@ a:hover .more__anchor,
 }
 
 /* ---------- 12. Tagesablauf (#tagesablauf) ----------
-   Eigenständiger Block, alle Klassen mit Präfix schedule- (keine
-   Abhängigkeit von page_about.css – eigener WP-Template-Part). */
+   Baustein "Zeitachse Tagesablauf" (.zta-) aus Second Brain/Taste Libary
+   und Vorlagen/zeitachse-tagesablauf, mit Kindertraum-CI und einer breiten,
+   geschwungenen Titelflaeche im Stil der Referenzvariante 1. Braucht kein
+   JavaScript (siehe Baustein-README). */
 
-.tagesablauf-section .schedule-intro {
-	max-width: 760px;
-	margin: 0 auto 40px;
-	text-align: center;
-	color: var(--kt-ink-soft);
+.tagesablauf-box {
+	padding: clamp(36px, 5vw, 80px) clamp(20px, 6vw, 90px) clamp(44px, 6vw, 90px);
 }
 
-.schedule-list {
-	display: flex;
-	flex-direction: column;
-	gap: 24px;
-	max-width: 920px;
+.zta {
+	--zta-akzent: var(--kt-sun);
+	--zta-akzent-text: var(--kt-ink);
+	--zta-linie-deck: .5;
+	--zta-text: var(--kt-ink);
+	--zta-weich: var(--kt-ink-soft);
+	--zta-grund: var(--kt-white);
+	--zta-fokus: var(--kt-sun);
+
+	--zta-spalte: 110px;
+	--zta-uhr: 92px;
+	--zta-punkt: 15px;
+	--zta-linie: 2px;
+	--zta-abstand: 60px;
+
+	--zta-lasche: 32px;
+	--zta-bild-radius: 20px;
+	--zta-box-radius: 20px;
+	--zta-box-rahmen: 2px dotted var(--kt-sun);
+	--zta-box-grund: rgba(255, 217, 119, .12);
+	--zta-box-luft: 40px;
+	--zta-box-abstand: 40px;
+
+	--zta-dauer: .3s;
+	--zta-easing: ease;
+
+	display: block;
+	box-sizing: border-box;
+	max-width: 1080px;
 	margin: 0 auto;
+	font-family: var(--sansserif);
+	color: var(--zta-text);
+	line-height: 2;
+}
+
+.zta__liste {
+	margin: 0;
+	padding: 0 0 0 var(--zta-spalte);
+	list-style: none;
+}
+
+.zta__station {
+	position: relative;
+	padding-bottom: var(--zta-abstand);
+}
+
+.zta__station::before {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: calc((var(--zta-spalte) / -2) - (var(--zta-linie) / 2));
+	width: var(--zta-linie);
+	height: 100%;
+	background-color: var(--zta-akzent);
+	opacity: var(--zta-linie-deck);
+}
+
+.zta__station:last-child { padding-bottom: 0; }
+.zta__station:last-child::before { display: none; }
+
+.zta__marke {
+	position: absolute;
+	top: 0;
+	left: calc(var(--zta-spalte) / -2 - var(--zta-uhr) / 2);
+	z-index: 2;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: var(--zta-uhr);
+	height: var(--zta-uhr);
+	border-radius: 100px;
+	background-color: var(--zta-grund);
+}
+
+.zta__zeit {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: calc(var(--zta-uhr) - 10px);
+	height: calc(var(--zta-uhr) - 10px);
+	border-radius: 100px;
+	background-color: var(--zta-akzent);
+	font: 700 clamp(15px, 1.6vw, 19px)/1 var(--sansserif-en);
+	color: var(--zta-akzent-text);
+	text-align: center;
+	font-variant-numeric: tabular-nums;
+}
+
+.zta__punkt {
+	position: absolute;
+	top: calc(var(--zta-uhr) / 2 - var(--zta-punkt) / 2);
+	left: calc((var(--zta-spalte) / -2) - (var(--zta-punkt) / 2));
+	z-index: 2;
+	width: var(--zta-punkt);
+	height: var(--zta-punkt);
+	border-radius: 100px;
+	background-color: var(--zta-akzent);
+	box-shadow: 0 0 0 5px var(--zta-grund);
+}
+
+.zta__inhalt { position: relative; }
+
+.zta__bild {
+	position: relative;
+	z-index: 1;
+	display: flex;
+	gap: 8px;
+	margin: 0;
+	overflow: hidden;
+	border-radius: var(--zta-bild-radius);
+	line-height: 0;
+	background: var(--kt-sky);
+}
+
+/* Bilder sind CSS-Verläufe, kein <img> (siehe Baustein-README) – sonst
+   kollidiert das eigene Karten-Icon/Label unserer Platzhalter-SVGs mit dem
+   "Biss" der Titelfläche. */
+.zta__bildflaeche {
+	flex: 1 1 0;
+	min-width: 0;
+	height: 200px;
+}
+
+.zta__bildflaeche--1 { background: linear-gradient(140deg, var(--kt-sky) 0%, #dcecf5 55%, var(--kt-cream) 100%); }
+.zta__bildflaeche--2 { background: linear-gradient(140deg, var(--kt-sun) 0%, #fbe9b8 55%, var(--kt-cream) 100%); }
+.zta__bildflaeche--3 { background: linear-gradient(140deg, var(--kt-sky-deep) 0%, var(--kt-sky) 55%, var(--kt-cream) 100%); }
+.zta__bildflaeche--4 { background: linear-gradient(140deg, #ffe8b8 0%, var(--kt-sun) 55%, var(--kt-cream) 100%); }
+
+.zta__titelflaeche {
+	position: relative;
+	z-index: 2;
+	display: block;
+	width: fit-content;
+	max-width: 100%;
+	box-sizing: border-box;
+	margin: calc(var(--zta-lasche) * -1) 0 .6em;
+	padding: 36px 70px 10px 0;
+	border-radius: 0 52px 0 0;
+	background-color: var(--zta-grund);
+}
+
+.zta__titel {
+	display: inline-block;
+	margin: 0;
+	padding-bottom: .2em;
+	border-bottom: var(--zta-box-rahmen);
+	font: 700 clamp(17px, 2vw, 21px)/1.4 var(--sansserif-en);
+	color: var(--zta-text);
+}
+
+.zta__text { margin: 0 0 .6em; }
+.zta__text:last-child { margin-bottom: 0; }
+
+.zta__fussnote {
+	margin: .4em 0 0;
+	padding: 0;
+	list-style: none;
+	font-size: .85em;
+	line-height: 1.8;
+	color: var(--zta-weich);
+}
+.zta__fussnote > .zta__fussnotenpunkt { margin: 0; }
+.zta__fussnotenpunkt::before { content: "* "; }
+
+.zta__gruppe { margin: 1em 0 0; }
+
+.zta__gruppentitel {
+	display: inline-block;
+	margin: 0 0 .6em;
+	padding: 5px 20px;
+	border-radius: 100px;
+	background-color: var(--zta-akzent);
+	font: 600 .9em/1.7 var(--sansserif-en);
+	color: var(--zta-akzent-text);
+}
+.zta__gruppentitel > .zta__klein { font-size: .85em; font-weight: 400; opacity: .9; }
+
+.zta__punkteliste {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0 40px;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+.zta__punkteliste > .zta__punkteintrag {
+	flex: 1 1 240px;
+	min-width: 0;
+	margin: 0 0 .8em;
+}
+
+.zta__eintragstitel {
+	position: relative;
+	margin: 0;
+	padding-left: 25px;
+	font: 600 1em/1.9 var(--sansserif-en);
+}
+.zta__eintragstitel::before {
+	content: "";
+	position: absolute;
+	top: .62em;
+	left: 0;
+	width: 15px;
+	height: 15px;
+	border-radius: 100px;
+	background-color: var(--zta-akzent);
+}
+.zta__eintragstext { margin: 0; font-size: .95em; color: var(--zta-weich); }
+
+.zta__hinweis {
+	display: flex;
+	align-items: flex-start;
+	gap: 30px;
+	box-sizing: border-box;
+	margin-top: var(--zta-box-abstand);
+	padding: var(--zta-box-luft);
+	border: var(--zta-box-rahmen);
+	border-radius: var(--zta-box-radius);
+	background-color: var(--zta-box-grund);
+}
+
+.zta__hinweisbild {
+	flex: 0 0 25%;
+	overflow: hidden;
+	border-radius: 10px;
+	line-height: 0;
+}
+.zta__hinweisbild > .zta__bildflaeche { width: 100%; height: 130px; }
+
+.zta__hinweistext { flex: 1 1 0; min-width: 0; margin: 0; font-weight: 600; }
+.zta__hinweistitel {
+	margin: 0 0 .4em;
+	font: 700 1.1em/1.6 var(--sansserif-en);
+}
+
+.zta__sprungleiste {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 10px;
+	margin: 0 0 40px;
 	padding: 0;
 	list-style: none;
 }
 
-.schedule-item {
-	display: flex;
-	flex-direction: column;
-	gap: 16px;
-	background-color: var(--kt-white);
-	border-radius: 32px;
-	box-shadow: 0 8px 24px rgba(58, 74, 85, 0.08);
-	padding: 24px;
-	transition: transform 0.4s ease, box-shadow 0.4s ease, opacity 0.6s ease-in-out;
+.zta__sprung {
+	display: inline-block;
+	padding: 6px 18px;
+	border: var(--zta-linie) solid var(--zta-akzent);
+	border-radius: 100px;
+	background-color: transparent;
+	font: 600 .85em/1.7 var(--sansserif);
+	color: var(--zta-text);
+	text-decoration: none;
+	cursor: pointer;
+	transition: background-color var(--zta-dauer) var(--zta-easing),
+	            color var(--zta-dauer) var(--zta-easing);
 }
 
-.schedule-item:hover {
-	transform: translateY(-4px);
-	box-shadow: 0 14px 32px rgba(58, 74, 85, 0.14);
+.zta__sprung:hover {
+	background-color: var(--zta-akzent);
+	color: var(--zta-akzent-text);
 }
 
-.schedule-time {
-	flex: 0 0 auto;
-	display: inline-flex;
-	align-items: baseline;
-	gap: 4px;
-	font-family: var(--sansserif-en);
-	font-weight: 700;
-	color: var(--kt-sky-night);
+.zta__sprung:focus-visible {
+	outline: 3px solid var(--zta-fokus);
+	outline-offset: 3px;
 }
 
-.schedule-time__value {
-	font-size: 2rem;
+.zta__station:target > .zta__marke > .zta__zeit {
+	box-shadow: 0 0 0 4px var(--zta-fokus);
 }
 
-.schedule-fig {
-	flex: 0 0 auto;
-	width: 96px;
-	aspect-ratio: 1;
-	margin: 0;
-	border-radius: 50%;
-	overflow: hidden;
-	background: var(--kt-sky);
-	display: flex;
-	align-items: center;
-	justify-content: center;
+@media (prefers-reduced-motion: no-preference) {
+	.zta { scroll-behavior: smooth; }
 }
 
-.schedule-fig img {
-	width: 78%;
-	height: auto;
-	object-fit: contain;
-}
-
-.schedule-ttl {
-	margin: 0 0 8px;
-	font-family: var(--sansserif-en);
-	font-weight: 700;
-	font-size: 1.9rem;
-	color: var(--kt-ink);
-}
-
-.schedule-txt {
-	margin: 0;
-	color: var(--kt-ink-soft);
-}
-
-.schedule-age + .schedule-age {
-	margin-top: 12px;
-}
-
-.schedule-age__ttl {
-	margin: 0 0 2px;
-	font-weight: 700;
-	font-size: 1.4rem;
-	color: var(--kt-ink);
-}
-
-.schedule-age__ttl small {
-	font-weight: 400;
-	color: var(--kt-ink-soft);
-}
-
-@media screen and (min-width: 600px) {
-	.schedule-item {
-		flex-direction: row;
-		align-items: flex-start;
-		gap: 24px;
+@media (max-width: 1024px) {
+	.zta {
+		--zta-spalte: 86px;
+		--zta-uhr: 72px;
+		--zta-abstand: 44px;
+		--zta-box-luft: 26px;
 	}
-
-	.schedule-time {
-		flex-direction: column;
-		align-items: center;
-		width: 64px;
-	}
+	.zta__hinweis { gap: 20px; }
+	.zta__bildflaeche { height: 170px; }
 }
 
-@media screen and (min-width: 1280px) {
-	.schedule-fig {
-		width: 120px;
+@media (max-width: 700px) {
+	.zta { --zta-spalte: 64px; --zta-uhr: 54px; --zta-box-luft: 20px; }
+	.zta__titelflaeche {
+		margin-top: -26px;
+		padding: 28px 32px 8px 0;
+		border-radius: 0 38px 0 0;
 	}
-
-	.schedule-ttl {
-		font-size: 2.1rem;
-	}
+	.zta__bildflaeche { height: 140px; }
+	.zta__hinweis { flex-wrap: wrap; }
+	.zta__hinweisbild { flex: 1 1 100%; }
+	.zta__hinweisbild > .zta__bildflaeche { height: 120px; }
 }
 
-.js .schedule-item {
-	opacity: 0;
-	transform: translateY(16px);
-}
-
-.js .schedule-item.is-visible {
-	opacity: 1;
-	transform: translateY(0);
-}
-
-@media (prefers-reduced-motion: reduce) {
-	.schedule-item,
-	.js .schedule-item {
-		opacity: 1;
-		transform: none;
-		transition: none;
+@media (max-width: 460px) {
+	.zta { --zta-spalte: 30px; --zta-uhr: 46px; }
+	.zta__marke {
+		position: static;
+		justify-content: flex-start;
+		width: auto;
+		height: auto;
+		margin-bottom: .5em;
+		background: transparent;
 	}
-
-	.schedule-item:hover {
-		transform: none;
+	.zta__zeit {
+		width: auto;
+		height: auto;
+		padding: 4px 16px;
+		border-radius: 100px;
 	}
+	.zta__punkt { top: 10px; }
+	.zta__titelflaeche { margin-top: -22px; padding-top: 24px; }
 }

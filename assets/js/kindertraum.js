@@ -3,6 +3,8 @@
    1. Scroll-Reveal für Karten (Fade + 16px nach oben, siehe kindertraum.css)
    2. Platzhalter-Links (href="#") neutralisieren, damit der Smoothscroll der
       Vorlage nicht auf ein leeres Ziel läuft.
+   3. Kontaktformular: bedingtes Feld, simulierter Versand
+   4. Kontaktformular: weitere Kinder hinzufügen/entfernen (z.B. Zwillinge)
    ========================================================================== */
 
 (function () {
@@ -10,7 +12,7 @@
 
 	// 1. Scroll-Reveal ------------------------------------------------------
 	function reveal() {
-		var items = document.querySelectorAll(".newsList__item, .menuBlock, .facilityList__item, .team-lead-card, .team-card, .team-value, .team-cta, .kontakt-card, .groupTile, .schedule-item");
+		var items = document.querySelectorAll(".newsList__item, .menuBlock, .facilityList__item, .team-lead-card, .team-card, .team-value, .team-cta, .kontakt-card, .groupTile");
 		var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 		if (!("IntersectionObserver" in window) || reduce) {
@@ -53,27 +55,15 @@
 
 		var requestType = document.getElementById("kontaktRequestType");
 		var visitField = document.getElementById("kontaktVisitField");
-		var submitBtn = document.getElementById("kontaktSubmitBtn");
-		var visitCta = document.getElementById("kontaktVisitCta");
 		var success = form.querySelector(".kontakt-form__success");
 
 		function syncVisitField() {
 			var isVisit = requestType.value === "besichtigung";
 			visitField.classList.toggle("is-active", isVisit);
-			submitBtn.querySelector(".kontakt-form__submit-label").textContent = isVisit ? "Besichtigung anfragen" : "Nachricht senden";
 		}
 
 		requestType.addEventListener("change", syncVisitField);
 		syncVisitField();
-
-		if (visitCta) {
-			visitCta.addEventListener("click", function (e) {
-				e.preventDefault();
-				requestType.value = "besichtigung";
-				syncVisitField();
-				form.scrollIntoView({ behavior: "smooth", block: "start" });
-			});
-		}
 
 		form.addEventListener("submit", function (e) {
 			e.preventDefault();
@@ -93,4 +83,35 @@
 	}
 
 	document.addEventListener("DOMContentLoaded", initKontaktForm);
+
+	// 4. Kontaktformular: weitere Kinder (z.B. Zwillinge) ------------------
+	function initKontaktChildren() {
+		var container = document.getElementById("kontaktChildren");
+		var addBtn = document.getElementById("kontaktAddChild");
+		if (!container || !addBtn) return;
+
+		function addRow() {
+			var row = container.querySelector(".kontakt-form__child-row").cloneNode(true);
+			Array.prototype.forEach.call(row.querySelectorAll("input"), function (input) {
+				input.value = "";
+			});
+
+			var removeBtn = document.createElement("button");
+			removeBtn.type = "button";
+			removeBtn.className = "kontakt-form__remove-child";
+			removeBtn.setAttribute("aria-label", "Kind entfernen");
+			removeBtn.innerHTML = '<span aria-hidden="true">×</span>';
+			removeBtn.addEventListener("click", function () {
+				row.remove();
+			});
+			row.appendChild(removeBtn);
+
+			container.appendChild(row);
+			row.querySelector('input[type="text"]').focus();
+		}
+
+		addBtn.addEventListener("click", addRow);
+	}
+
+	document.addEventListener("DOMContentLoaded", initKontaktChildren);
 })();
