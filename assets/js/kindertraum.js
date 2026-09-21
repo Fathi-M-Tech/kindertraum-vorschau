@@ -10,7 +10,7 @@
 
 	// 1. Scroll-Reveal ------------------------------------------------------
 	function reveal() {
-		var items = document.querySelectorAll(".newsList__item, .menuBlock, .facilityList__item, .team-lead-card, .team-card, .team-value, .team-cta, .kontakt-card, .groupTile");
+		var items = document.querySelectorAll(".newsList__item, .menuBlock, .facilityList__item, .team-lead-card, .team-card, .team-value, .team-cta, .kontakt-card, .groupTile, .schedule-item");
 		var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 		if (!("IntersectionObserver" in window) || reduce) {

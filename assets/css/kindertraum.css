@@ -2417,3 +2417,149 @@ a:hover .more__anchor,
 		transform: none;
 	}
 }
+
+/* ---------- 12. Tagesablauf (#tagesablauf) ----------
+   Eigenständiger Block, alle Klassen mit Präfix schedule- (keine
+   Abhängigkeit von page_about.css – eigener WP-Template-Part). */
+
+.tagesablauf-section .schedule-intro {
+	max-width: 760px;
+	margin: 0 auto 40px;
+	text-align: center;
+	color: var(--kt-ink-soft);
+}
+
+.schedule-list {
+	display: flex;
+	flex-direction: column;
+	gap: 24px;
+	max-width: 920px;
+	margin: 0 auto;
+	padding: 0;
+	list-style: none;
+}
+
+.schedule-item {
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+	background-color: var(--kt-white);
+	border-radius: 32px;
+	box-shadow: 0 8px 24px rgba(58, 74, 85, 0.08);
+	padding: 24px;
+	transition: transform 0.4s ease, box-shadow 0.4s ease, opacity 0.6s ease-in-out;
+}
+
+.schedule-item:hover {
+	transform: translateY(-4px);
+	box-shadow: 0 14px 32px rgba(58, 74, 85, 0.14);
+}
+
+.schedule-time {
+	flex: 0 0 auto;
+	display: inline-flex;
+	align-items: baseline;
+	gap: 4px;
+	font-family: var(--sansserif-en);
+	font-weight: 700;
+	color: var(--kt-sky-night);
+}
+
+.schedule-time__value {
+	font-size: 2rem;
+}
+
+.schedule-fig {
+	flex: 0 0 auto;
+	width: 96px;
+	aspect-ratio: 1;
+	margin: 0;
+	border-radius: 50%;
+	overflow: hidden;
+	background: var(--kt-sky);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.schedule-fig img {
+	width: 78%;
+	height: auto;
+	object-fit: contain;
+}
+
+.schedule-ttl {
+	margin: 0 0 8px;
+	font-family: var(--sansserif-en);
+	font-weight: 700;
+	font-size: 1.9rem;
+	color: var(--kt-ink);
+}
+
+.schedule-txt {
+	margin: 0;
+	color: var(--kt-ink-soft);
+}
+
+.schedule-age + .schedule-age {
+	margin-top: 12px;
+}
+
+.schedule-age__ttl {
+	margin: 0 0 2px;
+	font-weight: 700;
+	font-size: 1.4rem;
+	color: var(--kt-ink);
+}
+
+.schedule-age__ttl small {
+	font-weight: 400;
+	color: var(--kt-ink-soft);
+}
+
+@media screen and (min-width: 600px) {
+	.schedule-item {
+		flex-direction: row;
+		align-items: flex-start;
+		gap: 24px;
+	}
+
+	.schedule-time {
+		flex-direction: column;
+		align-items: center;
+		width: 64px;
+	}
+}
+
+@media screen and (min-width: 1280px) {
+	.schedule-fig {
+		width: 120px;
+	}
+
+	.schedule-ttl {
+		font-size: 2.1rem;
+	}
+}
+
+.js .schedule-item {
+	opacity: 0;
+	transform: translateY(16px);
+}
+
+.js .schedule-item.is-visible {
+	opacity: 1;
+	transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.schedule-item,
+	.js .schedule-item {
+		opacity: 1;
+		transform: none;
+		transition: none;
+	}
+
+	.schedule-item:hover {
+		transform: none;
+	}
+}

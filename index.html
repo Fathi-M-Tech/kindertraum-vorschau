@@ -24,9 +24,12 @@
 <!-- Vorlagen-CSS unverändert (Layout, Grid, Breakpoints), danach die Kindertraum-Overrides -->
 <link rel="stylesheet" type="text/css" media="all" href="assets/css/base.css">
 <link rel="stylesheet" type="text/css" media="all" href="assets/css/page_home.css">
+<link rel="stylesheet" type="text/css" media="all" href="assets/css/page_about.css">
+<link rel="stylesheet" type="text/css" media="all" href="assets/css/bsr.css">
 <link rel="stylesheet" type="text/css" media="all" href="assets/css/kindertraum.css">
 <script src="assets/js/module_common.js"></script>
 <script src="assets/js/page_home.js" defer></script>
+<script src="assets/js/bsr.js" defer></script>
 <script src="assets/js/kindertraum.js" defer></script>
 
 </head>
@@ -48,23 +51,33 @@
 					</p>
 					<ul class="g-nav__list main">
 						<li class="g-nav__li anm">
-							<a href="#news" class="g-nav__anchor">
-								<span class="lbl">Aktuelles</span>
-							</a>
-						</li>
-						<li class="g-nav__li anm">
 							<a href="#message" class="g-nav__anchor">
 								<span class="lbl">Über uns</span>
 							</a>
 						</li>
 						<li class="g-nav__li anm">
-							<a href="unsere-einrichtung.html" class="g-nav__anchor">
+							<a href="#einrichtung" class="g-nav__anchor">
 								<span class="lbl">Unsere Einrichtung</span>
 							</a>
 						</li>
 						<li class="g-nav__li anm">
-							<a href="gruppen.html" class="g-nav__anchor">
+							<a href="#news" class="g-nav__anchor">
+								<span class="lbl">Highlights</span>
+							</a>
+						</li>
+						<li class="g-nav__li anm">
+							<a href="#gruppen" class="g-nav__anchor">
 								<span class="lbl">Gruppen</span>
+							</a>
+						</li>
+						<li class="g-nav__li anm">
+							<a href="#tagesablauf" class="g-nav__anchor">
+								<span class="lbl">Tagesablauf</span>
+							</a>
+						</li>
+						<li class="g-nav__li anm">
+							<a href="#team" class="g-nav__anchor">
+								<span class="lbl">Team</span>
 							</a>
 						</li>
 						<li class="g-nav__li anm">
@@ -72,15 +85,10 @@
 								<span class="lbl">Familienzentrum</span>
 							</a>
 						</li>
-						<li class="g-nav__li anm">
-							<a href="team.html" class="g-nav__anchor">
-								<span class="lbl">Team</span>
-							</a>
-						</li>
 					</ul>
 					<ul class="g-nav__list sub anm">
 						<li class="g-nav__li">
-							<a href="#homeMenu" class="g-nav__anchor">
+							<a href="#kontakt" class="g-nav__anchor">
 								<span class="lbl">Kontakt</span>
 							</a>
 						</li>
@@ -301,14 +309,241 @@
 			</div>
 
 			<!-- ============================================================ -->
-			<!-- 3. AKTUELLES  (WP-Template-Part: news, 4 Karten)              -->
-			<!-- Demo-Inhalte – werden später durch echte Beiträge ersetzt.    -->
+			<!-- 3. UNSERE EINRICHTUNG  (WP-Template-Part: einrichtung)         -->
+			<!-- Übernommen aus unsere-einrichtung.html (siehe _archiv/)        -->
+			<!-- ============================================================ -->
+			<div id="einrichtung" class="einrichtung-section c-section--m">
+				<div class="titleContents">
+					<h2 class="contents__ttl h-ut">
+						<span class="contents__ttl-txt">Unsere Einrichtung</span>
+					</h2>
+				</div>
+
+				<div id="overview" class="overview block">
+					<div class="overviewContentsWrap bg--white w-state vtWrap">
+						<h2 class="contents__ttl t vertical">
+							<span class="contents__ttl-txt">Überblick</span>
+						</h2>
+						<dl class="overviewList">
+							<div class="ov__item space_adjustment">
+								<dt class="ovTitle b">Träger</dt>
+								<dd class="ovData">Elterninitiative Kindergarten Kindertraum e.V.</dd>
+							</div>
+							<div class="ov__item">
+								<dt class="ovTitle b">Seit</dt>
+								<dd class="ovData">1989</dd>
+							</div>
+							<div class="ov__item">
+								<dt class="ovTitle b">Einrichtung</dt>
+								<dd class="ovData">Zweigruppiger Kindergarten &amp; Familienzentrum</dd>
+							</div>
+							<div class="ov__item">
+								<dt class="ovTitle b">Gruppen</dt>
+								<dd class="ovData"><span class="ib">Wolken</span> · <span class="ib">Sterne</span></dd>
+							</div>
+							<div class="ov__item">
+								<dt class="ovTitle b">Betreuung</dt>
+								<dd class="ovData">35 h &amp; 45 h pro Woche</dd>
+							</div>
+							<div class="ov__item">
+								<dt class="ovTitle b">Offen für</dt>
+								<dd class="ovData">Alle Familien – unabhängig von Herkunft, Religion oder Lebensform</dd>
+							</div>
+							<div class="ov__item">
+								<dt class="ovTitle b">Telefon</dt>
+								<dd class="ovData">02351 679678</dd>
+							</div>
+							<div class="ov__item">
+								<dt class="ovTitle b">E-Mail</dt>
+								<dd class="ovData"><a href="mailto:mail@kindergarten-kindertraum.de" class="map__anchor b">mail@kindergarten-kindertraum.de</a></dd>
+							</div>
+						</dl>
+						<div class="supplyBox dotBox">
+							<h2 class="supply__ttl b">Lernt uns kennen</h2>
+							<p class="supply__txt">Ihr möchtet unsere Räume, das Außengelände und unser Team persönlich kennenlernen? Wir zeigen euch gern die Einrichtung und beantworten eure Fragen zu Betreuungszeiten, Anmeldung und Familienzentrum.</p>
+							<div class="telWrap">
+								<dl class="telNum">
+									<div class="telNum__block">
+										<dt class="tel__label">TEL</dt>
+										<dd class="tel__data">02351 679678</dd>
+									</div>
+									<small>Mo–Do 07:00–16:30 · Fr 07:00–15:30</small>
+								</dl>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div id="access" class="access block c-section--m">
+					<div class="accessContentsWrap w-state">
+						<figure class="access__fig access__fig--full vtWrap">
+							<h2 class="contents__ttl t vertical">
+								<span class="contents__ttl-txt">Anfahrt</span>
+							</h2>
+							<video class="access__video img--radius" controls preload="metadata" playsinline poster="assets/video/kindertraum-video-poster.jpg">
+								<source src="assets/video/kindertraum-video-720p.mp4" type="video/mp4">
+								Euer Browser unterstützt keine Videowiedergabe.
+							</video>
+						</figure>
+					</div>
+				</div>
+
+				<div id="facility" class="facility block c-section--m">
+					<div class="facilityContentsWrap bg--white w-state vtWrap">
+						<h2 class="contents__ttl t vertical">
+							<span class="contents__ttl-txt">Einrichtung</span>
+						</h2>
+						<div class="facilityList">
+								<div id="einrichtung-wolken" class="facilityList__item hzWrap">
+									<div class="fcFigWrap">
+										<div class="bsr" data-bsr data-bsr-beschriftung="Gruppenraum Wolken">
+										<div class="bsr__buehne" data-bsr-buehne tabindex="0" role="group" aria-roledescription="Bilderslider" aria-label="Gruppenraum Wolken">
+											<button class="bsr__pfeil bsr__pfeil--zurueck" type="button" data-bsr-zurueck aria-label="Vorheriges Bild">
+												<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5 8 12l7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+											</button>
+											<button class="bsr__pfeil bsr__pfeil--vor" type="button" data-bsr-vor aria-label="Nächstes Bild">
+												<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+											</button>
+											<h3 class="bsr__titel">Gruppenraum Wolken</h3>
+											<p class="bsr__zaehler" data-bsr-zaehler aria-hidden="true">1 / 3</p>
+											<div class="bsr__slide is-aktiv" data-bsr-slide data-bsr-titel="Gruppenraum Wolken" data-bsr-text="&lt;b&gt;Leseecke&lt;/b&gt;Ein ruhiger Platz zum Vorlesen, Bilderbuch-Anschauen und Ankommen – hier beginnt der Tag in der Gruppe Wolken oft gemeinsam.">
+												<img class="bsr__bild" src="assets/img/placeholder/einr-wolken-leseecke.svg" alt="Leseecke – Platzhalterbild">
+											</div>
+											<div class="bsr__slide" data-bsr-slide data-bsr-titel="Gruppenraum Wolken" data-bsr-text="&lt;b&gt;Baubereich&lt;/b&gt;Bausteine, Fahrzeuge und Konstruktionsmaterial laden zum Tüfteln ein – allein oder im Team.">
+												<img class="bsr__bild" src="assets/img/placeholder/einr-wolken-baubereich.svg" alt="Baubereich – Platzhalterbild">
+											</div>
+											<div class="bsr__slide" data-bsr-slide data-bsr-titel="Gruppenraum Wolken" data-bsr-text="&lt;b&gt;Freispiel&lt;/b&gt;Im Freispiel entscheiden die Kinder selbst, was, wo und mit wem sie spielen – so lernen sie miteinander und voneinander.">
+												<img class="bsr__bild" src="assets/img/placeholder/einr-wolken-freispiel.svg" alt="Freispiel – Platzhalterbild">
+											</div>
+										</div>
+										<p class="bsr__unterschrift" data-bsr-text-ziel><b>Leseecke</b>Ein ruhiger Platz zum Vorlesen, Bilderbuch-Anschauen und Ankommen – hier beginnt der Tag in der Gruppe Wolken oft gemeinsam.</p>
+										<ul class="bsr__punkte" data-bsr-punkte></ul>
+										<p data-bsr-status role="status" aria-live="polite" class="bsr__status"></p>
+									</div>
+									</div>
+								</div>
+								<div class="facilityList__item hzWrap">
+									<div class="fcFigWrap">
+										<div class="bsr" data-bsr data-bsr-beschriftung="Gruppenraum Sterne">
+										<div class="bsr__buehne" data-bsr-buehne tabindex="0" role="group" aria-roledescription="Bilderslider" aria-label="Gruppenraum Sterne">
+											<button class="bsr__pfeil bsr__pfeil--zurueck" type="button" data-bsr-zurueck aria-label="Vorheriges Bild">
+												<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5 8 12l7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+											</button>
+											<button class="bsr__pfeil bsr__pfeil--vor" type="button" data-bsr-vor aria-label="Nächstes Bild">
+												<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+											</button>
+											<h3 class="bsr__titel">Gruppenraum Sterne</h3>
+											<p class="bsr__zaehler" data-bsr-zaehler aria-hidden="true">1 / 3</p>
+											<div class="bsr__slide is-aktiv" data-bsr-slide data-bsr-titel="Gruppenraum Sterne" data-bsr-text="&lt;b&gt;Kreativtisch&lt;/b&gt;Malen, Schneiden, Kleben: Am Kreativtisch der Gruppe Sterne entstehen jeden Tag neue Werke.">
+												<img class="bsr__bild" src="assets/img/placeholder/einr-sterne-kreativtisch.svg" alt="Kreativtisch – Platzhalterbild">
+											</div>
+											<div class="bsr__slide" data-bsr-slide data-bsr-titel="Gruppenraum Sterne" data-bsr-text="&lt;b&gt;Rollenspiel&lt;/b&gt;Puppenecke, Verkleidungskiste und Kaufladen – im Rollenspiel probieren die Kinder die Welt der Großen aus.">
+												<img class="bsr__bild" src="assets/img/placeholder/einr-sterne-rollenspiel.svg" alt="Rollenspiel – Platzhalterbild">
+											</div>
+											<div class="bsr__slide" data-bsr-slide data-bsr-titel="Gruppenraum Sterne" data-bsr-text="&lt;b&gt;Kuschelecke&lt;/b&gt;Ein weicher Rückzugsort zum Ausruhen, Kuscheln und Kraft tanken.">
+												<img class="bsr__bild" src="assets/img/placeholder/einr-sterne-kuschelecke.svg" alt="Kuschelecke – Platzhalterbild">
+											</div>
+										</div>
+										<p class="bsr__unterschrift" data-bsr-text-ziel><b>Kreativtisch</b>Malen, Schneiden, Kleben: Am Kreativtisch der Gruppe Sterne entstehen jeden Tag neue Werke.</p>
+										<ul class="bsr__punkte" data-bsr-punkte></ul>
+										<p data-bsr-status role="status" aria-live="polite" class="bsr__status"></p>
+									</div>
+									</div>
+								</div>
+								<div class="facilityList__item hzWrap">
+									<div class="fcFigWrap">
+										<div class="bsr" data-bsr data-bsr-beschriftung="Außengelände">
+										<div class="bsr__buehne" data-bsr-buehne tabindex="0" role="group" aria-roledescription="Bilderslider" aria-label="Außengelände">
+											<button class="bsr__pfeil bsr__pfeil--zurueck" type="button" data-bsr-zurueck aria-label="Vorheriges Bild">
+												<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5 8 12l7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+											</button>
+											<button class="bsr__pfeil bsr__pfeil--vor" type="button" data-bsr-vor aria-label="Nächstes Bild">
+												<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+											</button>
+											<h3 class="bsr__titel">Außengelände</h3>
+											<p class="bsr__zaehler" data-bsr-zaehler aria-hidden="true">1 / 3</p>
+											<div class="bsr__slide is-aktiv" data-bsr-slide data-bsr-titel="Außengelände" data-bsr-text="&lt;b&gt;Kletterbereich&lt;/b&gt;Klettern, Balancieren, Rutschen – auf dem Außengelände ist jeden Tag Bewegung angesagt.">
+												<img class="bsr__bild" src="assets/img/placeholder/einr-aussen-kletterbereich.svg" alt="Kletterbereich – Platzhalterbild">
+											</div>
+											<div class="bsr__slide" data-bsr-slide data-bsr-titel="Außengelände" data-bsr-text="&lt;b&gt;Sandkasten&lt;/b&gt;Buddeln, Bauen und Matschen: Der Sandkasten ist bei jedem Wetter ein Lieblingsplatz.">
+												<img class="bsr__bild" src="assets/img/placeholder/einr-aussen-sandkasten.svg" alt="Sandkasten – Platzhalterbild">
+											</div>
+											<div class="bsr__slide" data-bsr-slide data-bsr-titel="Außengelände" data-bsr-text="&lt;b&gt;Wiese&lt;/b&gt;Platz zum Rennen, Toben und für gemeinsame Spiele an der frischen Luft.">
+												<img class="bsr__bild" src="assets/img/placeholder/einr-aussen-wiese.svg" alt="Wiese – Platzhalterbild">
+											</div>
+										</div>
+										<p class="bsr__unterschrift" data-bsr-text-ziel><b>Kletterbereich</b>Klettern, Balancieren, Rutschen – auf dem Außengelände ist jeden Tag Bewegung angesagt.</p>
+										<ul class="bsr__punkte" data-bsr-punkte></ul>
+										<p data-bsr-status role="status" aria-live="polite" class="bsr__status"></p>
+									</div>
+									</div>
+								</div>
+								<div class="facilityList__item hzWrap half__item">
+									<div class="fcFigWrap">
+										<div class="bsr bsr--kompakt" data-bsr data-bsr-beschriftung="Bewegungsraum">
+										<div class="bsr__buehne" data-bsr-buehne tabindex="0" role="group" aria-roledescription="Bilderslider" aria-label="Bewegungsraum">
+											<h3 class="bsr__titel">Bewegungsraum</h3>
+											<div class="bsr__slide is-aktiv" data-bsr-slide data-bsr-titel="Bewegungsraum" data-bsr-text="&lt;b&gt;Bewegungsraum&lt;/b&gt;Matten, Bänke und Bälle: Hier turnen, tanzen und toben die Kinder – Bewegungsförderung gehört zu unserem Alltag.">
+												<img class="bsr__bild" src="assets/img/placeholder/einr-bewegungsraum.svg" alt="Bewegungsraum – Platzhalterbild">
+											</div>
+										</div>
+										<p class="bsr__unterschrift" data-bsr-text-ziel><b>Bewegungsraum</b>Matten, Bänke und Bälle: Hier turnen, tanzen und toben die Kinder – Bewegungsförderung gehört zu unserem Alltag.</p>
+									</div>
+									</div>
+								</div>
+								<div class="facilityList__item hzWrap half__item">
+									<div class="fcFigWrap">
+										<div class="bsr bsr--kompakt" data-bsr data-bsr-beschriftung="Kreativbereich">
+										<div class="bsr__buehne" data-bsr-buehne tabindex="0" role="group" aria-roledescription="Bilderslider" aria-label="Kreativbereich">
+											<h3 class="bsr__titel">Kreativbereich</h3>
+											<div class="bsr__slide is-aktiv" data-bsr-slide data-bsr-titel="Kreativbereich" data-bsr-text="&lt;b&gt;Kreativbereich&lt;/b&gt;Farben, Papier und Naturmaterial – im Kreativbereich darf ausprobiert, gestaltet und gestaunt werden.">
+												<img class="bsr__bild" src="assets/img/placeholder/einr-kreativbereich.svg" alt="Kreativbereich – Platzhalterbild">
+											</div>
+										</div>
+										<p class="bsr__unterschrift" data-bsr-text-ziel><b>Kreativbereich</b>Farben, Papier und Naturmaterial – im Kreativbereich darf ausprobiert, gestaltet und gestaunt werden.</p>
+									</div>
+									</div>
+								</div>
+								<div class="facilityList__item hzWrap half__item">
+									<div class="fcFigWrap">
+										<div class="bsr bsr--kompakt" data-bsr data-bsr-beschriftung="Küche &amp; Essbereich">
+										<div class="bsr__buehne" data-bsr-buehne tabindex="0" role="group" aria-roledescription="Bilderslider" aria-label="Küche &amp; Essbereich">
+											<h3 class="bsr__titel">Küche &amp; Essbereich</h3>
+											<div class="bsr__slide is-aktiv" data-bsr-slide data-bsr-titel="Küche &amp; Essbereich" data-bsr-text="&lt;b&gt;Küche &amp; Essbereich&lt;/b&gt;Gemeinsame Mahlzeiten in gemütlicher Runde – und ab und zu wird auch zusammen gebacken.">
+												<img class="bsr__bild" src="assets/img/placeholder/einr-kueche.svg" alt="Küche &amp; Essbereich – Platzhalterbild">
+											</div>
+										</div>
+										<p class="bsr__unterschrift" data-bsr-text-ziel><b>Küche &amp; Essbereich</b>Gemeinsame Mahlzeiten in gemütlicher Runde – und ab und zu wird auch zusammen gebacken.</p>
+									</div>
+									</div>
+								</div>
+								<div class="facilityList__item hzWrap half__item">
+									<div class="fcFigWrap">
+										<div class="bsr bsr--kompakt" data-bsr data-bsr-beschriftung="Garten">
+										<div class="bsr__buehne" data-bsr-buehne tabindex="0" role="group" aria-roledescription="Bilderslider" aria-label="Garten">
+											<h3 class="bsr__titel">Garten</h3>
+											<div class="bsr__slide is-aktiv" data-bsr-slide data-bsr-titel="Garten" data-bsr-text="&lt;b&gt;Garten&lt;/b&gt;Beete, Beeren und Blumen: Im Garten erleben die Kinder die Natur im Wandel der Jahreszeiten.">
+												<img class="bsr__bild" src="assets/img/placeholder/einr-garten.svg" alt="Garten – Platzhalterbild">
+											</div>
+										</div>
+										<p class="bsr__unterschrift" data-bsr-text-ziel><b>Garten</b>Beete, Beeren und Blumen: Im Garten erleben die Kinder die Natur im Wandel der Jahreszeiten.</p>
+									</div>
+									</div>
+								</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- ============================================================ -->
+			<!-- 4. HIGHLIGHTS  (WP-Template-Part: news, 4 Karten)              -->
+			<!-- vormals "Aktuelles" – Demo-Inhalte, später echte Beiträge      -->
 			<!-- ============================================================ -->
 			<div id="news" class="news c-section--s">
 				<div class="newsContents w-state">
 					<div class="titleContents">
 						<h2 class="contents__ttl h-ut">
-							<span class="contents__ttl-txt">Aktuelles</span>
+							<span class="contents__ttl-txt">Highlights</span>
 						</h2>
 						<div class="moreWrap">
 							<a href="#" class="more__anchor">Alle Beiträge</a>
@@ -384,12 +619,420 @@
 			</div>
 
 			<!-- ============================================================ -->
-			<!-- 4. MENÜ-KACHELN  (WP-Template-Part: home-menu, 5 Karten)      -->
+			<!-- 5. GRUPPEN  (WP-Template-Part: gruppen)                        -->
+			<!-- Übernommen aus gruppen.html (siehe _archiv/)                   -->
+			<!-- ============================================================ -->
+			<div id="gruppen" class="gruppen-section c-section--m">
+				<div class="titleContents">
+					<h2 class="contents__ttl h-ut">
+						<span class="contents__ttl-txt">Gruppen</span>
+					</h2>
+				</div>
+				<div class="team-intro w-state">
+					<p class="team-intro__sub">Vier Gruppen, ein gemeinsames Zuhause.</p>
+					<p class="team-intro__txt">Bei Kindertraum wachsen die Kinder in vier festen Gruppen auf – zwei Regelgruppen und zwei U3-Gruppen. Jede Gruppe hat ihren eigenen Namen und ihr eigenes Team, das die Kinder Tag für Tag begleitet.</p>
+				</div>
+
+				<div id="regelgruppen" class="groupSection block c-section--m">
+					<div class="team-section__head w-state">
+						<h2 class="team-section__ttl h-ut"><span class="team-section__ttl-txt">Regelgruppen</span></h2>
+						<p class="team-section__lead">In unserem Kindergarten gibt es zwei Regelgruppen mit jeweils 25 Kindern, die Krümelmonster und die Tigerenten.</p>
+					</div>
+					<ul class="groupList w-state">
+						<li class="groupTile">
+							<figure class="groupTile__fig">
+								<picture class="groupTile__motion">
+									<source media="(prefers-reduced-motion: reduce)" srcset="assets/img/regelgruppe/kruemelmonster-still.png">
+									<img class="groupTile__img" src="assets/img/regelgruppe/kruemelmonster-animiert.webp" alt="Krümelmonster" loading="lazy">
+								</picture>
+							</figure>
+							<div class="groupTile__body">
+								<h3 class="groupTile__name">Krümelmonster</h3>
+								<p class="groupTile__meta">Regelgruppe · 25 Kinder im Alter von 3–6 Jahren</p>
+							</div>
+						</li>
+						<li class="groupTile">
+							<figure class="groupTile__fig">
+								<picture class="groupTile__motion">
+									<source media="(prefers-reduced-motion: reduce)" srcset="assets/img/regelgruppe/tigerente-still.png">
+									<img class="groupTile__img" src="assets/img/regelgruppe/tigerente-animiert.webp" alt="Tigerenten" loading="lazy">
+								</picture>
+							</figure>
+							<div class="groupTile__body">
+								<h3 class="groupTile__name">Tigerenten</h3>
+								<p class="groupTile__meta">Regelgruppe · 25 Kinder im Alter von 3–6 Jahren</p>
+							</div>
+						</li>
+					</ul>
+				</div>
+
+				<div id="u3-gruppen" class="groupSection block c-section--m">
+					<div class="team-section__head w-state">
+						<h2 class="team-section__ttl h-ut"><span class="team-section__ttl-txt">U3-Gruppen</span></h2>
+						<p class="team-section__lead">In unserem Kindergarten gibt es zwei U3-Gruppen, die Krabbelkäfer und die Glühwürmchen. In jeder Gruppe finden 10 Kinder im Alter von 4 Monaten bis 3 Jahren einen Platz.</p>
+					</div>
+					<ul class="groupList w-state">
+						<li class="groupTile groupTile--u3">
+							<figure class="groupTile__fig">
+								<picture class="groupTile__motion">
+									<source media="(prefers-reduced-motion: reduce)" srcset="assets/img/regelgruppe/krabbelkaefer-still.png">
+									<img class="groupTile__img" src="assets/img/regelgruppe/krabbelkaefer-animiert.webp" alt="Krabbelkäfer" loading="lazy">
+								</picture>
+							</figure>
+							<div class="groupTile__body">
+								<h3 class="groupTile__name">Krabbelkäfer</h3>
+								<p class="groupTile__meta">U3-Gruppe · 10 Kinder im Alter von 4 Monaten bis 3 Jahren</p>
+							</div>
+						</li>
+						<li class="groupTile groupTile--u3">
+							<figure class="groupTile__fig">
+								<picture class="groupTile__motion">
+									<source media="(prefers-reduced-motion: reduce)" srcset="assets/img/regelgruppe/gluehwuermchen-still.png">
+									<img class="groupTile__img" src="assets/img/regelgruppe/gluehwuermchen-animiert.webp" alt="Glühwürmchen" loading="lazy">
+								</picture>
+							</figure>
+							<div class="groupTile__body">
+								<h3 class="groupTile__name">Glühwürmchen</h3>
+								<p class="groupTile__meta">U3-Gruppe · 10 Kinder im Alter von 4 Monaten bis 3 Jahren</p>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+
+			<!-- ============================================================ -->
+			<!-- 6. TAGESABLAUF  (WP-Template-Part: tagesablauf)                -->
+			<!-- Platzhalter-Rhythmus, Markup-Muster: Yamakita "day-schedule"   -->
+			<!-- Klassen bewusst mit Präfix schedule- (eigener, isolierter      -->
+			<!-- Block ohne Kollisionen mit page_about.css)                     -->
+			<!-- ============================================================ -->
+			<div id="tagesablauf" class="tagesablauf-section c-section--m">
+				<div class="titleContents">
+					<h2 class="contents__ttl h-ut">
+						<span class="contents__ttl-txt">Tagesablauf</span>
+					</h2>
+				</div>
+				<p class="schedule-intro">Platzhalter: So könnte ein typischer Tag bei Kindertraum aussehen – verlässliche Rituale und viel Raum für Freispiel, Bewegung und Gemeinschaft. Die genauen Zeiten und Angebote werden noch mit dem Team abgestimmt.</p>
+
+				<ul class="schedule-list">
+					<li class="schedule-item">
+						<div class="schedule-time"><span class="schedule-time__value">7:00</span></div>
+						<figure class="schedule-fig"><img src="assets/img/placeholder/einr-wolken-leseecke.svg" class="ofi" alt=""></figure>
+						<div class="schedule-body">
+							<h3 class="schedule-ttl">Ankunft &amp; Bringzeit</h3>
+							<p class="schedule-txt">Platzhalter: Ab 7:00 Uhr kommen die Kinder nach und nach an, werden persönlich begrüßt und finden in Ruhe ins Freispiel.</p>
+						</div>
+					</li>
+					<li class="schedule-item">
+						<div class="schedule-time"><span class="schedule-time__value">9:00</span></div>
+						<figure class="schedule-fig"><img src="assets/img/placeholder/news-spielen.svg" class="ofi" alt=""></figure>
+						<div class="schedule-body">
+							<h3 class="schedule-ttl">Morgenkreis &amp; Frühstück</h3>
+							<p class="schedule-txt">Platzhalter: Gemeinsam beginnt der Tag im Morgenkreis mit Liedern und einem Rückblick auf den Tagesplan, anschließend gibt es ein gemeinsames Frühstück in der Gruppe.</p>
+						</div>
+					</li>
+					<li class="schedule-item">
+						<div class="schedule-time"><span class="schedule-time__value">9:30</span></div>
+						<figure class="schedule-fig"><img src="assets/img/placeholder/news-basteln.svg" class="ofi" alt=""></figure>
+						<div class="schedule-body">
+							<h3 class="schedule-ttl">Angebote &amp; Aktivitäten</h3>
+							<div class="schedule-age">
+								<h4 class="schedule-age__ttl">U3-Gruppen <small>(Krabbelkäfer &amp; Glühwürmchen)</small></h4>
+								<p class="schedule-txt">Platzhalter: Sinnesangebote, Bewegungsspiele und viel Freispiel im geschützten Rahmen der Gruppe.</p>
+							</div>
+							<div class="schedule-age">
+								<h4 class="schedule-age__ttl">Regelgruppen <small>(Krümelmonster &amp; Tigerenten)</small></h4>
+								<p class="schedule-txt">Platzhalter: Kreative Projekte, Sprachförderung, Ausflüge und gezielte pädagogische Angebote je nach Alter und Interesse.</p>
+							</div>
+						</div>
+					</li>
+					<li class="schedule-item">
+						<div class="schedule-time"><span class="schedule-time__value">11:30</span></div>
+						<figure class="schedule-fig"><img src="assets/img/placeholder/einr-kueche.svg" class="ofi" alt=""></figure>
+						<div class="schedule-body">
+							<h3 class="schedule-ttl">Mittagessen</h3>
+							<p class="schedule-txt">Platzhalter: Gemeinsame Mahlzeit in gemütlicher Runde – wer möchte, hilft beim Tischdecken und Aufräumen mit.</p>
+						</div>
+					</li>
+					<li class="schedule-item">
+						<div class="schedule-time"><span class="schedule-time__value">12:30</span></div>
+						<figure class="schedule-fig"><img src="assets/img/placeholder/einr-sterne-kuschelecke.svg" class="ofi" alt=""></figure>
+						<div class="schedule-body">
+							<h3 class="schedule-ttl">Ruhezeit</h3>
+							<p class="schedule-txt">Platzhalter: Die Jüngeren halten Mittagsschlaf, die Älteren ruhen sich bei einer Vorlesegeschichte oder leiser Musik aus.</p>
+						</div>
+					</li>
+					<li class="schedule-item">
+						<div class="schedule-time"><span class="schedule-time__value">14:00</span></div>
+						<figure class="schedule-fig"><img src="assets/img/placeholder/einr-aussen-wiese.svg" class="ofi" alt=""></figure>
+						<div class="schedule-body">
+							<h3 class="schedule-ttl">Nachmittag im Freispiel</h3>
+							<p class="schedule-txt">Platzhalter: Je nach Wetter geht es raus auf das Außengelände oder es wird drinnen weitergespielt, gebastelt und getobt.</p>
+						</div>
+					</li>
+					<li class="schedule-item">
+						<div class="schedule-time"><span class="schedule-time__value">15:30</span></div>
+						<figure class="schedule-fig"><img src="assets/img/placeholder/hero-aussengelaende.svg" class="ofi" alt=""></figure>
+						<div class="schedule-body">
+							<h3 class="schedule-ttl">Abholzeiten &amp; Abschied</h3>
+							<p class="schedule-txt">Platzhalter: Ab 15:30 Uhr (freitags ab 14:30 Uhr) werden die Kinder abgeholt – mit Zeit für einen kurzen Austausch über den Tag.</p>
+						</div>
+					</li>
+				</ul>
+			</div>
+
+			<!-- ============================================================ -->
+			<!-- 7. TEAM  (WP-Template-Part: team)                              -->
+			<!-- Übernommen aus team.html (siehe _archiv/)                      -->
+			<!-- ============================================================ -->
+			<div id="team" class="team-section c-section--m">
+				<div class="titleContents">
+					<h2 class="contents__ttl h-ut">
+						<span class="contents__ttl-txt">Team</span>
+					</h2>
+				</div>
+				<div class="team-intro w-state">
+					<p class="team-intro__sub">Lernen, begleiten und gemeinsam wachsen.</p>
+					<p class="team-intro__txt">Bei Kindertraum begleitet ein eingespieltes Team jedes Kind mit Wärme, Geduld und echtem Interesse. Wir arbeiten eng mit den Familien zusammen, tauschen uns offen aus und gestalten den Alltag gemeinsam – wertschätzend, verlässlich und mit viel Freude.</p>
+				</div>
+
+				<div id="leitung" class="team-lead block">
+					<div class="team-lead-card w-state">
+						<img class="team-lead-card__cloud" src="assets/img/clouds/cloud-small.svg" alt="" aria-hidden="true">
+						<figure class="team-lead-card__fig">
+							<img class="team-lead-card__img" src="assets/img/team/claudia-okon.jpg" alt="Claudia Okon" width="1024" height="1536">
+						</figure>
+						<div class="team-lead-card__body">
+							<p class="team-lead-card__kicker">Leitung</p>
+							<h2 class="team-lead-card__name">Claudia Okon</h2>
+							<p class="team-lead-card__role">Leitung Kindergarten Kindertraum e.V.</p>
+							<p class="team-lead-card__txt">Platzhalter: Hier steht später ein persönlicher Text der Leitung – über den Weg zu Kindertraum, die pädagogische Haltung und das, was ihr im Alltag mit den Kindern und Familien besonders wichtig ist.</p>
+							<p class="team-lead-card__txt">Platzhalter: Ein zweiter Absatz kann Ausbildung, Schwerpunkte oder ein Zitat aufnehmen, das die Atmosphäre im Haus beschreibt.</p>
+						</div>
+					</div>
+				</div>
+
+				<div id="team-mitglieder" class="team-members block c-section--m">
+					<div class="team-section__head w-state">
+						<h2 class="team-section__ttl h-ut"><span class="team-section__ttl-txt">Unser pädagogisches Team</span></h2>
+						<p class="team-section__lead">Erzieherinnen und Erzieher, Fachkräfte und Helferinnen – in vier Gruppen und im Büro für die Kinder und ihre Familien da.</p>
+					</div>
+					<ul class="team-grid w-state">
+					<li class="team-card">
+						<figure class="team-card__fig">
+							<img class="team-card__img" src="assets/img/team/thumbs/nicole-schulte.jpg" alt="Nicole Schulte" loading="lazy" width="640" height="960">
+						</figure>
+						<div class="team-card__body">
+							<h3 class="team-card__name">Nicole Schulte</h3>
+							<p class="team-card__role">Büro</p>
+							<p class="team-card__badge">Leitung & Büro</p>
+							<p class="team-card__txt">Platzhalter: Hier steht später ein persönlicher Satz – zum Beispiel, was mir an der Arbeit mit Kindern besonders am Herzen liegt.</p>
+						</div>
+					</li>
+					<li class="team-card">
+						<figure class="team-card__fig">
+							<img class="team-card__img" src="assets/img/team/thumbs/marcella-bless.jpg" alt="Marcella Bless" loading="lazy" width="640" height="960">
+						</figure>
+						<div class="team-card__body">
+							<h3 class="team-card__name">Marcella Bless</h3>
+							<p class="team-card__role">Pädagogische Fachkraft</p>
+							<p class="team-card__badge">Krümelmonster</p>
+							<p class="team-card__txt">Platzhalter: Ein kurzer Einblick in meinen Alltag in der Gruppe und was mich an Kindertraum begeistert.</p>
+						</div>
+					</li>
+					<li class="team-card">
+						<figure class="team-card__fig">
+							<img class="team-card__img" src="assets/img/team/thumbs/michelle-wirachowski.jpg" alt="Michelle Wirachowski" loading="lazy" width="640" height="960">
+						</figure>
+						<div class="team-card__body">
+							<h3 class="team-card__name">Michelle Wirachowski</h3>
+							<p class="team-card__role">Pädagogische Fachkraft</p>
+							<p class="team-card__badge">Krümelmonster</p>
+							<p class="team-card__txt">Platzhalter: Zwei bis drei Zeilen über meine Schwerpunkte, Ausbildung oder Lieblingsmomente im Kindergarten.</p>
+						</div>
+					</li>
+					<li class="team-card">
+						<figure class="team-card__fig">
+							<img class="team-card__img" src="assets/img/team/thumbs/jolanthe-reder.jpg" alt="Jolanthe Reder" loading="lazy" width="640" height="960">
+						</figure>
+						<div class="team-card__body">
+							<h3 class="team-card__name">Jolanthe Reder</h3>
+							<p class="team-card__role">Pädagogische Fachkraft</p>
+							<p class="team-card__badge">Krümelmonster</p>
+							<p class="team-card__txt">Platzhalter: Hier steht später ein persönlicher Satz – zum Beispiel, was mir an der Arbeit mit Kindern besonders am Herzen liegt.</p>
+						</div>
+					</li>
+					<li class="team-card">
+						<figure class="team-card__fig">
+							<img class="team-card__img" src="assets/img/team/thumbs/kadriye-koeksal.jpg" alt="Kadriye Köksal" loading="lazy" width="640" height="960">
+						</figure>
+						<div class="team-card__body">
+							<h3 class="team-card__name">Kadriye Köksal</h3>
+							<p class="team-card__role">Pädagogische Fachkraft</p>
+							<p class="team-card__badge">Tigerenten</p>
+							<p class="team-card__txt">Platzhalter: Ein kurzer Einblick in meinen Alltag in der Gruppe und was mich an Kindertraum begeistert.</p>
+						</div>
+					</li>
+					<li class="team-card">
+						<figure class="team-card__fig">
+							<img class="team-card__img" src="assets/img/team/thumbs/sandra-kosuschek.jpg" alt="Sandra Kosuschek" loading="lazy" width="640" height="960">
+						</figure>
+						<div class="team-card__body">
+							<h3 class="team-card__name">Sandra Kosuschek</h3>
+							<p class="team-card__role">Pädagogische Fachkraft</p>
+							<p class="team-card__badge">Tigerenten</p>
+							<p class="team-card__txt">Platzhalter: Zwei bis drei Zeilen über meine Schwerpunkte, Ausbildung oder Lieblingsmomente im Kindergarten.</p>
+						</div>
+					</li>
+					<li class="team-card">
+						<figure class="team-card__fig">
+							<img class="team-card__img" src="assets/img/team/thumbs/mika-sauer.jpg" alt="Mika Sauer" loading="lazy" width="640" height="960">
+						</figure>
+						<div class="team-card__body">
+							<h3 class="team-card__name">Mika Sauer</h3>
+							<p class="team-card__role">Pädagogische Fachkraft</p>
+							<p class="team-card__badge">Tigerenten</p>
+							<p class="team-card__txt">Platzhalter: Hier steht später ein persönlicher Satz – zum Beispiel, was mir an der Arbeit mit Kindern besonders am Herzen liegt.</p>
+						</div>
+					</li>
+					<li class="team-card">
+						<figure class="team-card__fig">
+							<img class="team-card__img" src="assets/img/team/thumbs/bahar-sayik.jpg" alt="Bahar Sayik" loading="lazy" width="640" height="960">
+						</figure>
+						<div class="team-card__body">
+							<h3 class="team-card__name">Bahar Sayik</h3>
+							<p class="team-card__role">FOS-Praktikantin</p>
+							<p class="team-card__badge">Tigerenten</p>
+							<p class="team-card__txt">Platzhalter: Ein kurzer Einblick in meinen Alltag in der Gruppe und was mich an Kindertraum begeistert.</p>
+						</div>
+					</li>
+					<li class="team-card">
+						<figure class="team-card__fig">
+							<img class="team-card__img" src="assets/img/team/thumbs/katharina-thater.jpg" alt="Katharina Thater" loading="lazy" width="640" height="960">
+						</figure>
+						<div class="team-card__body">
+							<h3 class="team-card__name">Katharina Thater</h3>
+							<p class="team-card__role">Stellv. Leitung</p>
+							<p class="team-card__badge">Krabbelkäfer</p>
+							<p class="team-card__txt">Platzhalter: Zwei bis drei Zeilen über meine Schwerpunkte, Ausbildung oder Lieblingsmomente im Kindergarten.</p>
+						</div>
+					</li>
+					<li class="team-card">
+						<figure class="team-card__fig">
+							<img class="team-card__img" src="assets/img/team/thumbs/larissa-kreinberg.jpg" alt="Larissa Kreinberg" loading="lazy" width="640" height="960">
+						</figure>
+						<div class="team-card__body">
+							<h3 class="team-card__name">Larissa Kreinberg</h3>
+							<p class="team-card__role">Pädagogische Fachkraft</p>
+							<p class="team-card__badge">Krabbelkäfer</p>
+							<p class="team-card__txt">Platzhalter: Hier steht später ein persönlicher Satz – zum Beispiel, was mir an der Arbeit mit Kindern besonders am Herzen liegt.</p>
+						</div>
+					</li>
+					<li class="team-card">
+						<figure class="team-card__fig">
+							<img class="team-card__img" src="assets/img/team/thumbs/amine-harman-guelen.jpg" alt="Amine Harman Gülen" loading="lazy" width="640" height="960">
+						</figure>
+						<div class="team-card__body">
+							<h3 class="team-card__name">Amine Harman Gülen</h3>
+							<p class="team-card__role">Pädagogische Fachkraft</p>
+							<p class="team-card__badge">Krabbelkäfer</p>
+							<p class="team-card__txt">Platzhalter: Ein kurzer Einblick in meinen Alltag in der Gruppe und was mich an Kindertraum begeistert.</p>
+						</div>
+					</li>
+					<li class="team-card">
+						<figure class="team-card__fig">
+							<img class="team-card__img" src="assets/img/team/thumbs/katja-schmidt.jpg" alt="Katja Schmidt" loading="lazy" width="640" height="960">
+						</figure>
+						<div class="team-card__body">
+							<h3 class="team-card__name">Katja Schmidt</h3>
+							<p class="team-card__role">Pädagogische Fachkraft</p>
+							<p class="team-card__badge">Glühwürmchen</p>
+							<p class="team-card__txt">Platzhalter: Zwei bis drei Zeilen über meine Schwerpunkte, Ausbildung oder Lieblingsmomente im Kindergarten.</p>
+						</div>
+					</li>
+					<li class="team-card">
+						<figure class="team-card__fig">
+							<img class="team-card__img" src="assets/img/team/thumbs/mouna-akhabbach.jpg" alt="Mouna Akhabbach" loading="lazy" width="640" height="960">
+						</figure>
+						<div class="team-card__body">
+							<h3 class="team-card__name">Mouna Akhabbach</h3>
+							<p class="team-card__role">Pädagogische Fachkraft</p>
+							<p class="team-card__badge">Glühwürmchen</p>
+							<p class="team-card__txt">Platzhalter: Hier steht später ein persönlicher Satz – zum Beispiel, was mir an der Arbeit mit Kindern besonders am Herzen liegt.</p>
+						</div>
+					</li>
+					<li class="team-card">
+						<figure class="team-card__fig">
+							<img class="team-card__img" src="assets/img/team/thumbs/melanie-soldanski.jpg" alt="Melanie Soldanski" loading="lazy" width="640" height="960">
+						</figure>
+						<div class="team-card__body">
+							<h3 class="team-card__name">Melanie Soldanski</h3>
+							<p class="team-card__role">Pädagogische Fachkraft</p>
+							<p class="team-card__badge">Glühwürmchen</p>
+							<p class="team-card__txt">Platzhalter: Ein kurzer Einblick in meinen Alltag in der Gruppe und was mich an Kindertraum begeistert.</p>
+						</div>
+					</li>
+					<li class="team-card">
+						<figure class="team-card__fig">
+							<img class="team-card__img" src="assets/img/team/thumbs/liza-mueller.jpg" alt="Liza Müller" loading="lazy" width="640" height="960">
+						</figure>
+						<div class="team-card__body">
+							<h3 class="team-card__name">Liza Müller</h3>
+							<p class="team-card__role">Alltagshelferin</p>
+							<p class="team-card__badge">Alltagshilfe</p>
+							<p class="team-card__txt">Platzhalter: Zwei bis drei Zeilen über meine Schwerpunkte, Ausbildung oder Lieblingsmomente im Kindergarten.</p>
+						</div>
+					</li>
+					</ul>
+				</div>
+
+				<div id="werte" class="team-values-block block c-section--m">
+					<div class="team-section__head w-state">
+						<h2 class="team-section__ttl h-ut"><span class="team-section__ttl-txt">Unsere Werte</span></h2>
+						<p class="team-section__lead">Vier Haltungen, die unseren Alltag prägen – vom ersten Ankommen bis zum Abschied in die Schule.</p>
+					</div>
+					<ul class="team-values w-state">
+						<li class="team-value">
+							<span class="team-value__icon"><i class="icon" data-icon="icon_heart"></i></span>
+							<h3 class="team-value__ttl">Geborgenheit</h3>
+							<p class="team-value__txt">Jedes Kind soll sich bei uns sicher und angenommen fühlen. Feste Bezugspersonen, verlässliche Rituale und Zeit zum Ankommen geben Halt.</p>
+						</li>
+						<li class="team-value">
+							<span class="team-value__icon"><i class="icon" data-icon="icon_human"></i></span>
+							<h3 class="team-value__ttl">Individualität</h3>
+							<p class="team-value__txt">Wir sehen jedes Kind mit seinen Stärken und seinem eigenen Tempo. Förderung heißt für uns: begleiten, nicht drängen.</p>
+						</li>
+						<li class="team-value">
+							<span class="team-value__icon"><i class="icon" data-icon="icon_speech"></i></span>
+							<h3 class="team-value__ttl">Gemeinschaft</h3>
+							<p class="team-value__txt">Als Elterninitiative leben wir Miteinander: Kinder, Familien und Team gestalten den Kindergarten gemeinsam – offen für alle.</p>
+						</li>
+						<li class="team-value">
+							<span class="team-value__icon"><i class="icon" data-icon="icon_science"></i></span>
+							<h3 class="team-value__ttl">Neugier</h3>
+							<p class="team-value__txt">Fragen stellen, ausprobieren, staunen: Wir schaffen Räume, in denen Kinder die Welt spielerisch entdecken dürfen.</p>
+						</li>
+					</ul>
+				</div>
+
+				<div id="team-cta" class="team-cta-block block c-section--m">
+					<div class="team-cta w-state">
+						<h2 class="team-cta__ttl">Lernt uns persönlich kennen</h2>
+						<p class="team-cta__txt">Am besten lernt ihr ein Team vor Ort kennen. Bei einer Besichtigung zeigen wir euch unsere Räume und das Außengelände, stellen die Gruppen vor und nehmen uns Zeit für eure Fragen zu Betreuung, Anmeldung und Familienzentrum.</p>
+						<div class="team-cta__actions">
+							<a href="#kontakt" class="more__anchor">Kontakt aufnehmen</a>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- ============================================================ -->
+			<!-- 8. MENÜ-KACHELN  (WP-Template-Part: home-menu, 5 Karten)      -->
 			<!-- ============================================================ -->
 			<div id="homeMenu" class="homeMenu c-section--m">
 				<div class="menuContents w-state">
 					<div class="menu--about menuBlock">
-						<a href="unsere-einrichtung.html" class="homeMenu__anchor">
+						<a href="#einrichtung" class="homeMenu__anchor">
 							<h2 class="contents__ttl t vertical">
 								<span class="contents__ttl-txt">Über uns</span>
 							</h2>
@@ -613,11 +1256,12 @@
 		<div class="Gf__layoutblock Gf__nav">
 			<p class="Gf__section-ttl">Navigation</p>
 			<ul class="Gf__nav__list">
-				<li class="Gf__nav__item"><a href="#news" class="Gf__nav__anchor"><span class="lbl">Aktuelles</span></a></li>
 				<li class="Gf__nav__item"><a href="#message" class="Gf__nav__anchor"><span class="lbl">Über uns</span></a></li>
-				<li class="Gf__nav__item"><a href="unsere-einrichtung.html" class="Gf__nav__anchor"><span class="lbl">Unsere Einrichtung</span></a></li>
-				<li class="Gf__nav__item"><a href="gruppen.html" class="Gf__nav__anchor"><span class="lbl">Gruppen</span></a></li>
-				<li class="Gf__nav__item"><a href="team.html" class="Gf__nav__anchor"><span class="lbl">Team</span></a></li>
+				<li class="Gf__nav__item"><a href="#einrichtung" class="Gf__nav__anchor"><span class="lbl">Unsere Einrichtung</span></a></li>
+				<li class="Gf__nav__item"><a href="#news" class="Gf__nav__anchor"><span class="lbl">Highlights</span></a></li>
+				<li class="Gf__nav__item"><a href="#gruppen" class="Gf__nav__anchor"><span class="lbl">Gruppen</span></a></li>
+				<li class="Gf__nav__item"><a href="#tagesablauf" class="Gf__nav__anchor"><span class="lbl">Tagesablauf</span></a></li>
+				<li class="Gf__nav__item"><a href="#team" class="Gf__nav__anchor"><span class="lbl">Team</span></a></li>
 			</ul>
 		</div>
 		<!-- Spalte 3: Kontakt -->
