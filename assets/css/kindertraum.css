@@ -243,7 +243,7 @@ a:hover {
 	position: absolute;
 	z-index: 2;
 	left: 24px;
-	bottom: calc(30vh + 20px);
+	bottom: 28vw;
 	display: flex;
 	align-items: center;
 	gap: 14px;
@@ -987,6 +987,26 @@ a:hover {
 }
 
 
+/* Footer auf Mobil zentrieren, solange die Spalten noch gestapelt sind */
+@media screen and (max-width: 767px) {
+	.Gf__other {
+		text-align: center;
+	}
+
+	.Gf__identity,
+	.Gf__social {
+		justify-content: center;
+	}
+
+	.Gf__nav__list {
+		justify-items: center;
+	}
+
+	.Gf__hours--icon {
+		justify-content: center;
+	}
+}
+
 @media screen and (min-width: 768px) {
 	.Gf__other {
 		grid-template-columns: 1fr 1fr;
@@ -1225,7 +1245,14 @@ a:hover .more__anchor,
 	color: var(--kt-sky-deep);
 }
 
-/* Vertikale Blocktitel (Überblick / Anfahrt / Einrichtung) wie auf der Startseite */
+/* Vertikale Blocktitel (Überblick / Anfahrt / Einrichtung) wie auf der Startseite.
+   Vorlage positioniert die Titel-Ecke bei left:0/top:0 ohne eigenen Abstand zur
+   Box-Kante – auf schmalen (mobilen) Boxen wirkt das reingepresst. */
+.vtWrap .contents__ttl {
+	left: 16px;
+	top: 12px;
+}
+
 .vtWrap .contents__ttl .contents__ttl-txt {
 	display: block;
 	writing-mode: vertical-rl;
