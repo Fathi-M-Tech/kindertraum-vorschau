@@ -1007,7 +1007,11 @@ a:hover {
 		text-align: center;
 	}
 
-	.Gf__identity,
+	.Gf__identity {
+		flex-direction: column;
+		align-items: center;
+	}
+
 	.Gf__social {
 		justify-content: center;
 	}
@@ -1257,14 +1261,6 @@ a:hover .more__anchor,
 
 .anchorList .anchorList__item .anchorList__anchor .icon {
 	color: var(--kt-sky-deep);
-}
-
-/* Vertikale Blocktitel (Überblick / Anfahrt / Einrichtung) wie auf der Startseite.
-   Vorlage positioniert die Titel-Ecke bei left:0/top:0 ohne eigenen Abstand zur
-   Box-Kante – auf schmalen (mobilen) Boxen wirkt das reingepresst. */
-.vtWrap .contents__ttl {
-	left: 16px;
-	top: 12px;
 }
 
 .vtWrap .contents__ttl .contents__ttl-txt {
