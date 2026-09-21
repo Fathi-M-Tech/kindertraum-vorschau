@@ -215,6 +215,20 @@ a:hover {
 	animation-delay: -3s;
 }
 
+/* Mobil: Wolkenbank größer als Vorlagen-Default (390px), damit sie beim ersten
+   Auftreffen auf die Seite dominanter wirkt und Logo/Schrift klar auf der
+   Wolke statt größtenteils über dem Foto sitzen. */
+@media screen and (max-width: 767px) {
+	.mountain--frontLeft img,
+	.mountain--frontRight img,
+	.mountain--frontBlock img {
+		height: 480px;
+	}
+	.mountain .mountain-behind img {
+		height: 460px;
+	}
+}
+
 /* Aufteilung wie bei Yamakita: seitliche Kuppen beginnen bei ≈ 46 % der Hero-Höhe, die Talwolke bei ≈ 64 %. Formen unverändert – nur die Bildhöhe (Breite skaliert mit). */
 @media screen and (min-width: 768px) {
 	.mountain--frontLeft img,
@@ -1264,6 +1278,12 @@ a:hover .more__anchor,
 	letter-spacing: 0.06em;
 	color: var(--kt-ink);
 	white-space: nowrap;
+}
+
+@media screen and (max-width: 480px) {
+	.vtWrap .contents__ttl .contents__ttl-txt {
+		font-size: 1.5rem;
+	}
 }
 
 @media screen and (min-width: 1280px) {
