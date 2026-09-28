@@ -752,6 +752,35 @@ a:hover {
 	transform: scale(1.03);
 }
 
+/* Video-Karten in den Aktivitäten: gleiche Position/Zuschnitt wie die
+   Bild-Variante der Vorlage, nur für <video> statt <img>. */
+.newsList__item .article__anchor .article__img video {
+	transition: transform 1s cubic-bezier(0.33, 0.73, 0, 0.83);
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	object-fit: cover;
+	width: 100%;
+	height: 100%;
+	border-radius: 40px;
+}
+
+.newsList__item .article__anchor:hover .article__img video {
+	transform: scale(1.03);
+}
+
+/* Beschreibungstext unter dem Video-Titel: gibt Interessent:innen einen
+   inhaltlichen Einblick in die jeweilige Aktivität. */
+.newsList__item .article__anchor .article__desc {
+	margin: 0.4em 0 0;
+	font-size: 0.85em;
+	line-height: 1.5;
+	color: var(--kt-ink-soft);
+	text-decoration: none;
+}
+
 @media screen and (min-width: 1280px) {
 	.titleContents .contents__ttl {
 		font-size: 3rem;
