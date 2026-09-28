@@ -781,6 +781,70 @@ a:hover {
 	text-decoration: none;
 }
 
+/* Smartphone: Jede Aktivitaet als zusammenhaengende Karte darstellen.
+   Die Vorlage beginnt bereits mobil mit zwei Spalten; mit den laengeren
+   Beschreibungen und Hochkantvideos wird das auf kleinen Displays zu eng. */
+@media screen and (max-width: 767px) {
+	.news .newsList {
+		display: block;
+	}
+
+	.news .newsList::before,
+	.news .newsList::after {
+		display: none;
+		content: none;
+	}
+
+	.newsList__item {
+		width: 100%;
+	}
+
+	.newsList__item + .newsList__item {
+		margin-top: 36px;
+	}
+
+	.newsList__item .article__anchor {
+		padding: 0;
+	}
+
+	.newsList__item .article__anchor .article__img {
+		width: 100%;
+		margin: 0 0 16px;
+		border-radius: 28px 28px 28px 0;
+		aspect-ratio: 4 / 3;
+	}
+
+	.newsList__item .article__anchor .article__img::after {
+		display: none;
+		content: none;
+		padding-top: 0;
+	}
+
+	.newsList__item .article__anchor .article__img video {
+		display: block;
+		border-radius: 28px 28px 28px 0;
+	}
+
+	.newsList__item .article__anchor .article__info {
+		padding: 0 4px;
+	}
+
+	.newsList__item .article__anchor .article__info .article__meta-cat {
+		font-size: 1.3rem;
+	}
+
+	.newsList__item .article__anchor .article__info .article__ttl {
+		font-size: 1.8rem;
+		line-height: 1.4;
+	}
+
+	.newsList__item .article__anchor .article__desc {
+		margin-top: 10px;
+		font-size: 1.5rem;
+		line-height: 1.75;
+	}
+}
+
 @media screen and (min-width: 1280px) {
 	.titleContents .contents__ttl {
 		font-size: 3rem;
